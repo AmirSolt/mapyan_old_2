@@ -8,8 +8,8 @@
 
 
 	
-	import Header from '$lib/components/basic/Header.svelte'
-	import Footer from '$lib/components/basic/Footer.svelte';
+	import Header from '$lib/components/general/ui/Header.svelte'
+	import Footer from '$lib/components/general/ui/Footer.svelte';
 	import { AppShell } from '@skeletonlabs/skeleton';
 
 
@@ -19,7 +19,7 @@
 	$: ({ supabaseAuthClient, session } = data);
 	
 	
-	import {loadUserCountry} from '$lib/data/stores'
+	import {loadUserCountry} from '$lib/utils/country'
 	
 	onMount(() => {
 		loadUserCountry();

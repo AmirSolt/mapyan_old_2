@@ -1,20 +1,20 @@
 <script lang="ts">
 	export let data;
-	$: ({ streamed, keyword } = data);
+	$: ({ streamed, searchTerm } = data);
 
-	import CompareBar from '$lib/components/products/CompareBar.svelte';
-	import Card from '$lib/components/products/Card.svelte';
-	import Search from '$lib/components/search/Search.svelte';
-    import CardsPlaceHolder from '$lib/components/products/CardsPlaceHolder.svelte';
+	import ProductSearch from '$lib/components/products/ui/ProductSearch.svelte';
+	import ProductCard from '$lib/components/products/ui/ProductCard.svelte';
+	import CompareBar from '$lib/components/compare/ui/CompareBar.svelte';
+
 </script>
 
-<Search {keyword} />
+<ProductSearch {searchTerm} />
 
 <CompareBar />
 
 <div class="my-5 w-full">
 	{#await streamed.products}
-    <CardsPlaceHolder />
+    <!-- <CardsPlaceHolder /> -->
 
     {:then products}
 		{#if products?.length === 0}
@@ -22,7 +22,7 @@
 		{:else}
 			<div class="grid gap-4 sm:grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 grid-rows-3">
 				{#each products ?? [] as product}
-					<Card {product} />	
+					<ProductCard {product} />	
 				{/each}
 			</div>
 		{/if}

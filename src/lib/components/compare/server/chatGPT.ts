@@ -1,7 +1,7 @@
 
 
 
-export const getResponse = async (compareObj) => {
+export const getResponse = async (message) => {
 
 
 }

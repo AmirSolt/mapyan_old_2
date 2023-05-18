@@ -1,4 +1,6 @@
 
+import {searchSchema} from '$lib/utils/schemas';
+import {getSearchResults} from '$lib/components/products/server/amazonApiFuncs'
 
 export const load = async ({params, url }) => {
 
@@ -8,7 +10,7 @@ export const load = async ({params, url }) => {
  
     if(!searchSchema.safeParse({country, keyword}).success){
         return{
-            keyword:keyword,
+            searchTerm:keyword,
             status: 400,
             streamed: {products: []}
         }
@@ -17,7 +19,7 @@ export const load = async ({params, url }) => {
 
 
     return{
-        keyword: keyword,
+        searchTerm: keyword,
         streamed:{
             products: getSearchResults(keyword, country)
         }
