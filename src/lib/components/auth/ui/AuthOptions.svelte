@@ -2,42 +2,47 @@
 
 
 <script lang="ts">
+    import { SlideToggle } from '@skeletonlabs/skeleton';
 	import { goto } from "$app/navigation";
 
 
+    let isLogin:boolean = true;
+
+    $: joinPhrase = isLogin ? 'Login' : 'Sign-Up';
 
 
     function gotoEmailAuth(){
-        goto("/email-auth")
+        goto(`/${joinPhrase}`)
     }
 
 </script>
 
 
+<SlideToggle name="slide" bind:checked={isLogin} />
 
 
 <div class="my-2">
 
 
     <button class="btn variant-ringed w-full my-1" on:click={()=>0}>
-        <span>with Google</span>  
+        <span>{joinPhrase} with Google</span>  
         <span>(icon)</span>
     </button>
 
     <button class="btn variant-ringed w-full my-1" on:click={()=>1}>
-        <span>with Apple</span>  
+        <span>{joinPhrase} with Apple</span>  
         <span>(icon)</span>
     </button>
 
 
     <button class="btn variant-ringed w-full my-1" on:click={()=>2}>
-        <span>with Facebook</span>  
+        <span>{joinPhrase} with Facebook</span>  
         <span>(icon)</span>
     </button>
 
 
     <button class="btn variant-ringed w-full my-1" on:click={gotoEmailAuth}>
-        <span>with Email</span>  
+        <span>{joinPhrase} with Email</span>  
         <span>(icon)</span>
     </button>
 

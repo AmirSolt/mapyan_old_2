@@ -1,30 +1,27 @@
 
 <script lang='ts'>
-
-    import { SlideToggle } from '@skeletonlabs/skeleton';
+    import { signup, verifyToken } from '../data/authFuncs'
     import HCaptcha from './HCaptcha.svelte';
     let stepIndex:number = 0;
     let usedEmail:string = '';
-    let isLogin:boolean = true;
+
+    import {page} from '$app/stores';
+    $: ({supabaseAuthClient} = $page.data)
 
 
-    async function otpInitForm(e){
+    async function signUpForm(e){
         const form = e.target
-        let data = new FormData(form)
-        usedEmail = data.get('email')?.toString()?? ''
+        let formData = new FormData(form)
+        usedEmail = formData.get('email')?.toString()?? ''
 
-        if(isLogin){
-            response = await login(supabaseAuthClient, data)
-        }else{
-            response = await signup(supabaseAuthClient, data)
-        }
+        let response = await signup(supabaseAuthClient, formData)
 
         stepIndex = 1;
     }
     async function verifyTokenForm(e) {
         const form = e.target
-        const data = new FormData(form)
-        response = await verifyToken(supabaseAuthClient, data)
+        const formData = new FormData(form)
+        let response = await verifyToken(supabaseAuthClient, formData)
 
     }
 
@@ -35,25 +32,16 @@
 
 {#if stepIndex==0}
 
-    <SlideToggle name="slide" bind:checked={isLogin} />
-    <form on:submit|preventDefault={otpInitForm}>
+    <form on:submit|preventDefault={signUpForm}>
         <label for="email">Email</label>
         <input type="email" name="email" id="email" required>
         <label for="password">Password</label>
         <input type="password" name="password" id="password" required>
-        {#if isLogin}
-            <button class="btn variant-filled" type="submit">Login</button>
-        {:else}
-            <button class="btn variant-filled" type="submit">Sign Up</button>
-        {/if}
+        <button class="btn variant-filled" type="submit">Sign Up</button>
         <HCaptcha />
     </form>
 
-    {#if isLogin}
-        <a href="/email-auth/reset-password">Reset Password</a>
-    {/if}
-
-
+   
 
 {:else if stepIndex==1}
 

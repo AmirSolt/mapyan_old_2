@@ -25,16 +25,17 @@
 			<div class="mx-2">
 				<LightSwitch />
 			</div>
-	
-			<a class="flex gap-1" href="/plans">
-				Plans
-			</a>
-			
+
 			{#if user}
                 <button>
                     Account
                 </button>
+			{:else}
+				<button>
+					Login
+				</button>
 			{/if}
+
 			
 		</svelte:fragment>
 </AppBar>
