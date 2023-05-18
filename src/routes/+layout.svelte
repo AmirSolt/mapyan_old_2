@@ -5,6 +5,63 @@
 	import '@skeletonlabs/skeleton/styles/skeleton.css';
 	// Most of your app wide CSS should be put in this file
 	import '../app.postcss';
+
+
+	
+	import Header from '$lib/components/basic/Header.svelte'
+	import Footer from '$lib/components/basic/Footer.svelte';
+	import { AppShell } from '@skeletonlabs/skeleton';
+
+
+	import { invalidate } from '$app/navigation';
+	import { onMount } from 'svelte';
+	export let data;
+	$: ({ supabaseAuthClient, session } = data);
+	
+	
+	import {loadUserCountry} from '$lib/data/stores'
+	
+	onMount(() => {
+		loadUserCountry();
+		// ================================
+		const { data } = supabaseAuthClient.auth.onAuthStateChange((event, _session) => {
+			if (_session?.expires_at !== session?.expires_at) {
+				invalidate('supabase:auth');
+			}
+		});
+		return () => data.subscription.unsubscribe();
+	});
+
+	
+
 </script>
 
-<slot />
+
+
+<svelte:head>
+	<title>TLDR</title>
+	<link rel="icon" href="https://fav.farm/🔥" />
+</svelte:head>
+
+
+<AppShell>
+
+	<svelte:fragment slot="header">
+		<header>
+				<Header />
+		</header>
+	</svelte:fragment>
+
+	<div class="flex justify-center w-full">
+		<div class="max-w-7xl p-4 w-full">
+			<slot />
+		</div>
+	</div>	
+	
+	<svelte:fragment slot="footer">
+		<footer>
+			<Footer />
+		</footer>
+		
+	</svelte:fragment>
+</AppShell>
