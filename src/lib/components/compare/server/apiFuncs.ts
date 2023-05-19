@@ -4,12 +4,10 @@
 
 
 
-export  const insertCompare = async (supabaseService, user, account_id, finalResponse, selectedProducts) => {
+export  const insertCompare = async (supabaseService, user, account_id, finalResponse, asins) => {
 
 
-    const asins = selectedProducts.map((product) => {
-        return product.asin
-    })
+    
 
     const {data, error:err} = supabaseService
         .from('compare_instance')
@@ -43,13 +41,13 @@ export const fetchAccountCredit = async (supabaseService, user) => {
     const {data, error:err} = await supabaseService.from('account').select('id, credit').eq('id', user.id).single()
 
     if(err){
-        console.log("SfetchAccountCredit error", err)
+        console.log("fetchAccountCredit error", err)
     }
     return data
 }
 
 export const updateCredit = async (supabaseService, user, finalCredit) => {
-    const {data, error:err} = await supabaseService.from('account').update({credit:finalCredit}).eq('id', user.id).single()
+    const {data, error:err} = await supabaseService.from('account').update({credit:finalCredit}).eq('id', user.id)
     
     if(err){
         console.log("updateCredit error", err)

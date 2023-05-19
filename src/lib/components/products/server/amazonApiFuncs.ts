@@ -83,19 +83,30 @@ async function getProductInformation(asin, domain){
     ).then((data)=>{
         const tempProduct = data["product"]
         let reviews = [];
+        let price = "";
 
         
-        if("top_reviews" in tempProduct)
-            reviews = tempProduct["top_reviews"].map((review)=> review["body"])
+        if("top_reviews" in tempProduct){
+            reviews = tempProduct["top_reviews"].map((review)=> review["body"].replace("Read more", ""))
+        }else{
+            reviews = ["No reviews found"]
+        }
    
+        if("buybox_winner"in tempProduct && "price" in tempProduct["buybox_winner"]){
+            const priceObj = tempProduct["buybox_winner"]["price"];
+            price = `${priceObj["value"]} ${priceObj["currency"]}`
+        }else{
+            price = "No prices found"
+        }
 
         product = {
             "title": tempProduct["title"],
-            "brand": tempProduct["brand"],
-            "categories": tempProduct["categories_flat"],
-            "description": tempProduct["description"],
-            "feature_bullets": tempProduct["feature_bullets_flat"],
-            "specifications": tempProduct["specifications_flat"],
+            "price":price,
+            // "brand": tempProduct["brand"],
+            // "categories": tempProduct["categories_flat"],
+            // "description": tempProduct["description"],
+            // "feature_bullets": tempProduct["feature_bullets_flat"],
+            // "specifications": tempProduct["specifications_flat"],
             "top_reviews": reviews,
         }
         

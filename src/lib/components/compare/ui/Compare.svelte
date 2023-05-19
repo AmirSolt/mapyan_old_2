@@ -1,20 +1,21 @@
 <script lang="ts">
 
-    import {selectedProducts} from '$lib/utils/stores'
+    import {selectedProducts, userCountry} from '$lib/utils/stores'
 
 
     import {onMount} from "svelte";
 
     onMount(async () => {
         let response = await fetch(
-            '/compare',
+            '/api/compare',
             {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    selectedProducts:$selectedProducts
+                    selectedProducts:$selectedProducts,
+                    userCountry:$userCountry
                 })
 
         })

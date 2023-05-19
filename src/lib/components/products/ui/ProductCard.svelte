@@ -8,13 +8,13 @@
 
     import {selectedProducts} from '$lib/utils/stores';
 
+    import {NumberOfCompareProducts} from '$lib/utils/config';
 
-    const MAX_COMPARE_LIST_SIZE = 3;
 
     function addCompareProduct(){
         selectedProducts.update(
             (list)=>{
-                if(list.length>=MAX_COMPARE_LIST_SIZE){
+                if(list.length>=NumberOfCompareProducts){
                     return list;
                 }
                 return list.find((item) => item.asin === product.asin) ? list : [...list, product]
@@ -105,13 +105,13 @@
     <footer>
 
         <div class='text-end w-full h-14'>
-            {#if $selectedProducts.find((item) => item.asin === product.asin) || $selectedProducts.length>=MAX_COMPARE_LIST_SIZE}
+            {#if $selectedProducts.find((item) => item.asin === product.asin) || $selectedProducts.length>=NumberOfCompareProducts}
                 <button class="btn variant-filled w-1/2 h-full" type="button" on:click={addCompareProduct} disabled>
                     -
                 </button>
             {:else}
                 <button class="btn variant-filled w-1/2 h-full" type="button" on:click={addCompareProduct}>
-                    + Compare
+                    + Add
                 </button>
             {/if}
         </div>

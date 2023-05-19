@@ -3,7 +3,7 @@
 
 
     async function deleteUser(){
-        await fetch('/delete-user')
+        await fetch('/api/delete-user')
         // redirect(302, "/")
     }
 

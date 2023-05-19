@@ -1,4 +1,7 @@
 
+import {FinalTokenCountLimit} from '$lib/utils/config'
+import { getTokens } from './tokenizer'
+
 
 export const userCheck = (session) => {
 
@@ -32,10 +35,37 @@ export const creditCheck = (credit) => {
 
 
 
-export const tokenCountCheck = (message) => {
 
 
+export const cleanProductInfos = (productInfos) => {
 
+    let popIndex = 0;
+
+    while(getTokens(JSON.stringify(productInfos)) > FinalTokenCountLimit){
+        if(popIndex >= productInfos.length)
+            popIndex = 0;
+
+        removeBiggestTextFromReviews(productInfos, popIndex);
+
+        popIndex++;
+    }    
 }
 
 
+function removeBiggestTextFromReviews(productInfos, index){
+
+
+
+    let biggestIndex = 0;
+    let biggestText = productInfos[index].top_reviews[0];
+
+    for(let i=1; i<productInfos[index].top_reviews.length; i++){
+        if(productInfos[index].top_reviews[i].length > biggestText.length){
+            biggestIndex = i;
+            biggestText = productInfos[index].top_reviews[i];
+        }
+    }
+
+    productInfos[index].top_reviews.splice(biggestIndex, 1);
+
+}

@@ -4,41 +4,47 @@ import type { CreateChatCompletionRequest, ChatCompletionRequestMessage } from '
 import { ChatCompletionRequestMessageRoleEnum } from 'openai'
 import { getTokens } from './tokenizer'
 
+import { ChatGPTInstructions, ChatGPTTemprature } from '$lib/utils/config'
 
 
 
+export const getResponse = async (productInfos) => {
 
-export const getResponse = (sysMessage) => {
 
+    const messages: ChatCompletionRequestMessage[] = [
+        { role: ChatCompletionRequestMessageRoleEnum.System, content: ChatGPTInstructions },
+        { role: ChatCompletionRequestMessageRoleEnum.User, content: JSON.stringify(productInfos)}
+    ]
 
+    const reponse = await getChatGPTResponse(messages)
+
+    return reponse
 }
 
-export const replaceProductNameWithLinks = (chatResponse) => {
 
 
 
-}
+async function getChatGPTResponse(messages) {
+    
 
-
-
-
-
-
-
-async function getChatGPTResponse(messages, systemMessage) {
-    const reqMessages: ChatCompletionRequestMessage[] = messages
-
-    if (!reqMessages) {
+    if (!messages) {
         throw new Error('no messages provided')
     }
 
     let tokenCount = 0
 
-    reqMessages.forEach((msg) => {
+    messages.forEach((msg) => {
         const tokens = getTokens(msg.content)
         tokenCount += tokens
     })
 
+    if (tokenCount >= 4000) {
+        throw new Error('Query too large')
+    }
+
+
+
+    // =================== Moderation =================== 
     const moderationRes = await fetch('https://api.openai.com/v1/moderations', {
         headers: {
             'Content-Type': 'application/json',
@@ -46,7 +52,7 @@ async function getChatGPTResponse(messages, systemMessage) {
         },
         method: 'POST',
         body: JSON.stringify({
-            input: reqMessages[reqMessages.length - 1].content
+            input: messages[messages.length - 1].content
         })
     })
     if (!moderationRes.ok) {
@@ -62,24 +68,16 @@ async function getChatGPTResponse(messages, systemMessage) {
     }
 
 
-    tokenCount += getTokens(systemMessage)
 
-    if (tokenCount >= 4000) {
-        throw new Error('Query too large')
-    }
+  
 
 
-
-    const messagesFormated: ChatCompletionRequestMessage[] = [
-        { role: ChatCompletionRequestMessageRoleEnum.System, content: systemMessage },
-        ...reqMessages
-    ]
-
+    // =================== Chat ===================
 
     const chatRequestOpts: CreateChatCompletionRequest = {
         model: 'gpt-3.5-turbo',
-        messages: messagesFormated,
-        temperature: 0.9,
+        messages: messages,
+        temperature: ChatGPTTemprature,
     }
 
     const chatResponse = await fetch('https://api.openai.com/v1/chat/completions', {

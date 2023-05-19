@@ -12,7 +12,7 @@ export const load = async ({ locals: { supabaseAuthServer, getSession } } ) => {
         }
     }
 
-    const { data, error: err } = await supabaseAuthServer.from('account').select('*, compare_instance(*)').eq('id', session.user.id).single()
+    const { data:account, error: err } = await supabaseAuthServer.from('account').select('*, compare_instance(*)').eq('id', session.user.id).single()
 
     if (err){
         console.log(err)
@@ -23,12 +23,6 @@ export const load = async ({ locals: { supabaseAuthServer, getSession } } ) => {
             }
         }
     }
-
-
-    console.log('///////////////////////')
-    console.log(data)
-
-    let account  = data
 
     return {
         account,

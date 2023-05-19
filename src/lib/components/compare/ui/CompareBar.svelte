@@ -46,7 +46,7 @@
 	<div class="me-3">
 		{#if $selectedProducts.length > 0}
 			<button class="btn variant-filled-primary h-14" type="button" on:click={openCompareModal}>
-				Open Chat
+				Compare	
 			</button>
 		{:else}
 			<button class="btn variant-ringed h-14" type="button" disabled> - </button>

@@ -9,5 +9,6 @@ const tokenizer = new GPT3Tokenizer({ type: 'gpt3' })
 
 export function getTokens(input: string): number {
 	const tokens = tokenizer.encode(input)
+	console.log("getTokens() reads:", tokens.text.length)
 	return tokens.text.length
 }
