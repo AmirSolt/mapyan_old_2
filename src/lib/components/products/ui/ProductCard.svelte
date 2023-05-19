@@ -40,8 +40,8 @@
     <!-- Media -->
     <header>
         <a href="{product.link}" id="media" target="_blank" rel="noopener">
-            <div class="drop-shadow-lg rounded-lg">
-                <img src="{product.image}" alt="Thumbnail" class=" w-full max-w-md max-h-md rounded-lg " loading="lazy">
+            <div class="drop-shadow-lg rounded-lg ">
+                <img src="{product.image}" alt="Thumbnail" class=" w-auto max-w-sm max-h-60 rounded-lg " loading="lazy">
             </div>
         </a>
     </header>

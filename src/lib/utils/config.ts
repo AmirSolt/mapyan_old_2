@@ -16,7 +16,7 @@ You should respond only in json format.
     {
         ASIN: [ASIN]
         ...
-        feature_{x}: [true,false],
+        {x feature}: [true,false],
         ...
         reviews_loved: [What do reviews love about this product?],
         reviews_hated: [What do reviews hate about this product?],

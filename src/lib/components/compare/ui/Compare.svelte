@@ -36,7 +36,7 @@
 	    remainingCredit = data.finalCredit
 	    isLoading=false
 
-        
+		processResponseToTable(compareResponseRaw)
 
 	    console.log("Compare.svelte:",data)
 	});
@@ -49,15 +49,15 @@
 
     function processResponseToTable(response:string){
         let converted = convertStringToObj(response)
-        selectedProduct = converted[0].asin
+        // selectedProduct = converted[0].asin
 
         const meta_headers = ['reviews_loved', 'reviews_hated']
         const body_headers = Object.keys(converted[0]).filter((key) => !meta_headers.includes(key))
 
         tableData = {
-            head: Object.keys(converted[0]),
+            head: body_headers,
             body: tableMapperValues(converted, body_headers),
-            meta: tableMapperValues(converted, ["asin"]),
+            meta: tableMapperValues(converted, meta_headers),
         };
     }
 
@@ -78,6 +78,7 @@
 {#if isLoading}
 	<ProgressRadial width="w-12" stroke={100} />
 {:else}
+	<!-- <div>
 	<small>
 		Your Remaining Credit: {remainingCredit}
 	</small>
@@ -86,10 +87,10 @@
         Click on row for more information
     </h2>
  
-	<Table source={tableData} interactive={true} on:selected={mySelectionHandler}/>
-
+	</div> -->
+	<Table source={tableData} interactive={true} on:selected={showSelectedProduct}/>
     
-    <div>
+    <!-- <div>
 
         <h2>
             Selected Product
@@ -102,6 +103,6 @@
            
         </div>
 
-    </div>
+    </div> -->
 
 {/if}

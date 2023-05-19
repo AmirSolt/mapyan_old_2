@@ -10,15 +10,18 @@
 </script>
 
 <Modal bind:showModal={showPrompt}>
-    {#if !session?.user}
-        <a href="/options/login" class="btn variant-filled">
-            Login
-        </a>
+    <div class="flex justify-center items-center h-full w-full">
 
-        <a href="/options/signup" class="btn variant-ringed">
-            Sign-up
-        </a>
-    {:else}
-        <Compare />
-    {/if}
+        {#if !session?.user}
+            <a href="/options/login" class="btn variant-filled">
+                Login
+            </a>
+    
+            <a href="/options/signup" class="btn variant-ringed">
+                Sign-up
+            </a>
+        {:else}
+            <Compare />
+        {/if}
+    </div>
 </Modal>
