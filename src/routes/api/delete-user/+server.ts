@@ -19,6 +19,6 @@ export const GET = async ({ locals: { getSession, supabaseAuthServer } }) => {
         throw error(400, "Something went wrong.")
 
 
-    throw redirect(303, "/logout")
+    throw redirect(303, "/api/logout")
 
 };

@@ -13,6 +13,7 @@
         let formData = new FormData(form)
 
         let response = await resetPasswordRequest(supabaseAuthClient, formData)
+
     }
 
 </script>

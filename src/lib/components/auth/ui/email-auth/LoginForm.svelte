@@ -30,7 +30,7 @@
   
 </form>
 
-<a href="/reset-password/initiate" class="btn variant-filled">
-    Logout
+<a href="/reset-password/initiate" class="btn variant-ringed">
+    Forgot Password?
 </a>
 

@@ -1,6 +1,7 @@
 
 import * as schemas from "$lib/utils/schemas"
 
+import {PUBLIC_DOMAIN} from '$env/static/public'
 
 
 export const signup = async (supabase, formData ) => {   
@@ -113,20 +114,24 @@ export const resetPasswordRequest = async (supabase, formData ) => {
     const email = req.email as string
 
     if(!schemas.resetPasswordReqSchema.safeParse({email}).success){
+        console.log("schema failed")
         return {
             error: true,
             message: "Invalid credentials"
         }
     }
 
-    const { data, error: err } = await supabase.auth.signInWithPassword({
-        email: email,
-        options: {
-            redirectTo: 'https://example.com/update-password',
+    const { data, error: err } = await supabase.auth.resetPasswordForEmail(
+        email,
+        {
+            redirectTo: `${PUBLIC_DOMAIN}/reset-password/update-password`,
         }
-    })
+    )
 
     if (err) {
+        console.log("resetPasswordRequest")
+        console.log(err)
+        console.log(data)
         return {
             error: true,
             message: "Authentification failed"

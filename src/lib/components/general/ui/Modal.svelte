@@ -1,19 +1,29 @@
 <script lang="ts">
 	import { X } from 'lucide-svelte';
 	export let showModal: boolean;
+	export let coverScreen: boolean = true;
 	let dialog: any;
 
 	$: if (dialog && showModal) dialog.showModal();
+
+	let dialogClass = coverScreen?
+		"card rounded-lg p-0 w-5/6 h-5/6 max-w-2xl":
+		"card rounded-lg p-0 w-3/6 h-2/6 max-w-2xl max-h-xl"
 </script>
+
+
+
+<!-- ****** To close the dialog by clicking on background ****** -->
+<!-- on:click|self={() => dialog.close()} -->
+<!-- *********************************************************** -->
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 {#if showModal}
 	<dialog
-		class="card rounded-lg p-0 w-5/6 h-5/6 max-w-2xl"
+		class="{dialogClass}"
 		bind:this={dialog}
 		on:close={() => (showModal = false)}
-		on:click|self={() => dialog.close()}
-	>
+		>
 		<div on:click|stopPropagation class="h-full">
 			<div class="absolute top-1 right-1">
 				<!-- svelte-ignore a11y-autofocus -->

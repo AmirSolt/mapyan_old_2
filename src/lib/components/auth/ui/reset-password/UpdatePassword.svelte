@@ -4,6 +4,7 @@
     import { updatePassword } from '$lib/components/auth/data/authFuncs'
 
     import {page} from '$app/stores';
+	import { goto } from '$app/navigation';
     $: ({supabaseAuthClient} = $page.data)
 
 
@@ -11,6 +12,8 @@
         const form = e.target
         let formData = new FormData(form)
         let response = await updatePassword(supabaseAuthClient, formData)
+
+        goto("/")
     }
 
 </script>
