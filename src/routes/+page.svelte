@@ -2,9 +2,15 @@
 
     import Banner from '$lib/components/general/ui/Banner.svelte'
     import ProductSearch from '$lib/components/products/ui/ProductSearch.svelte';
+
+
+    import CompareTable from '$lib/components/compare/ui/CompareTable.svelte';
 </script>
 
 
 <ProductSearch searchTerm={''} />
+
+
+<CompareTable />
 
 <Banner />

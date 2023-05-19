@@ -78,16 +78,17 @@
 {#if isLoading}
 	<ProgressRadial width="w-12" stroke={100} />
 {:else}
-	<!-- <div>
-	<small>
-		Your Remaining Credit: {remainingCredit}
-	</small>
+	<div>
+		
+		<small>
+			Your Remaining Credit: {remainingCredit}
+		</small>
 
-    <h2>
-        Click on row for more information
-    </h2>
- 
-	</div> -->
+		<h2>
+			Click on row for more information
+		</h2>
+
+	</div>
 	<Table source={tableData} interactive={true} on:selected={showSelectedProduct}/>
     
     <!-- <div>
