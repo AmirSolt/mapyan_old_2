@@ -1,10 +1,10 @@
 
 <script lang='ts'>
 
-    import { login } from '../../data/authFuncs'
-    import HCaptcha from '../HCaptcha.svelte';
+    import { login } from '$lib/components/auth/data/authFuncs'
 
     import {page} from '$app/stores';
+	import { goto } from '$app/navigation';
     $: ({supabaseAuthClient} = $page.data)
 
 
@@ -13,6 +13,8 @@
         let formData = new FormData(form)
 
         let response = await login(supabaseAuthClient, formData)
+
+        goto("/")
     }
 
 </script>
@@ -26,8 +28,9 @@
   
     <button class="btn variant-filled" type="submit">Login</button>
   
-    <HCaptcha />
 </form>
 
-
+<a href="/reset-password/initiate" class="btn variant-filled">
+    Logout
+</a>
 

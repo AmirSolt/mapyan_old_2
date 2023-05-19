@@ -1,11 +1,12 @@
 
 <script lang='ts'>
-    import { signup, verifyToken } from '../data/authFuncs'
-    import HCaptcha from './HCaptcha.svelte';
+    import { signup, verifyToken } from '$lib/components/auth/data/authFuncs'
+    import HCaptcha from '$lib/components/auth/ui/HCaptcha.svelte';
     let stepIndex:number = 0;
     let usedEmail:string = '';
 
     import {page} from '$app/stores';
+	import { goto } from '$app/navigation';
     $: ({supabaseAuthClient} = $page.data)
 
 
@@ -23,6 +24,7 @@
         const formData = new FormData(form)
         let response = await verifyToken(supabaseAuthClient, formData)
 
+        goto('/')
     }
 
 

@@ -27,13 +27,13 @@
 			</div>
 
 			{#if user}
-                <button>
-                    Account
-                </button>
+				<a href="/account" class="btn variant-filled">
+					Account
+				</a>
 			{:else}
-				<button>
+				<a href="/auth" class="btn variant-filled">
 					Login
-				</button>
+				</a>
 			{/if}
 
 			

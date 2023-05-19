@@ -41,7 +41,7 @@
     <header>
         <a href="{product.link}" id="media" target="_blank" rel="noopener">
             <div class="drop-shadow-lg rounded-lg">
-                <img src="{product.image}" alt="Thumbnail" class=" w-full max-w-md max-h-md rounded-lg ">
+                <img src="{product.image}" alt="Thumbnail" class=" w-full max-w-md max-h-md rounded-lg " loading="lazy">
             </div>
         </a>
     </header>

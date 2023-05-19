@@ -141,20 +141,26 @@ export const resetPasswordRequest = async (supabase, formData ) => {
 
 export const updatePassword = async (supabase, formData ) => {    
     const req = Object.fromEntries(formData) 
-    const email = req.email as string
-    const password = req.password as string
+    const new_password = req.new_password as string
+    const confirm_new_password = req.new_password as string
 
-    if(!signInSchema.safeParse({email, password}).success){
+    if(new_password !== confirm_new_password){
+        return {
+            error: true,
+            message: "Passwords do not match"
+        }
+    }
+
+    if(!schemas.updatePasswordSchema.safeParse({new_password}).success){
         return {
             error: true,
             message: "Invalid credentials"
         }
     }
 
-    const { data, error: err } = await supabase.auth.signInWithPassword({
-        email: email,
-        password: password,
-    })
+    const { data, error: err } = await supabase.auth.updateUser(
+        {password: new_password}
+    )
 
     if (err) {
         return {

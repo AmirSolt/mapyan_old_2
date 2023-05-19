@@ -6,19 +6,20 @@
 	import { goto } from "$app/navigation";
 
 
-    let isLogin:boolean = true;
+    let isSignup:boolean = false;
 
-    $: joinPhrase = isLogin ? 'Login' : 'Sign-Up';
+    $: joinPhrase = isSignup ? 'Sign-Up':'Login';
 
 
     function gotoEmailAuth(){
-        goto(`/${joinPhrase}`)
+        goto(`/email-auth/${joinPhrase.toLowerCase()}`)
     }
 
 </script>
 
-
-<SlideToggle name="slide" bind:checked={isLogin} />
+<span>Login</span>
+<SlideToggle name="slide" bind:checked={isSignup} />
+<span>Sign-up</span>
 
 
 <div class="my-2">
