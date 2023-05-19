@@ -5,4 +5,4 @@
 </script>
 
 
-<AuthOptions />
+<AuthOptions isSignup={false} />

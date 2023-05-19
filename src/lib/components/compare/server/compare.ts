@@ -20,13 +20,12 @@ export const compare = async (session, selectedProducts, country) => {
     let productInfos = await getProductsByAsins(asins, country)
     validate.cleanProductInfos(productInfos);
 
-    console.log("productInfos Length", productInfos.length)
 
     let finalResponse = await chatGPT.getResponse(productInfos);
 
     let finalCredit = account.credit - CompareCreditCost;
-    apiFuncs.updateCredit(supabaseService, user, finalCredit); //run async don't wait for response
-    apiFuncs.insertCompare(supabaseService, user, account.id, finalResponse, asins); //run async don't wait for response
+    await apiFuncs.updateCredit(supabaseService, user, finalCredit); //run async don't wait for response
+    await apiFuncs.insertCompare(supabaseService, user, account.id, finalResponse, asins); //run async don't wait for response
 
 
     return {

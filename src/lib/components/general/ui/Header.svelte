@@ -31,8 +31,12 @@
 					Account
 				</a>
 			{:else}
-				<a href="/auth" class="btn variant-filled">
+				<a href="/options/login" class="btn variant-filled">
 					Login
+				</a>
+
+				<a href="/options/signup" class="btn variant-ringed">
+					Sign-up
 				</a>
 			{/if}
 

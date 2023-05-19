@@ -6,7 +6,7 @@
 	import { goto } from "$app/navigation";
 
 
-    let isSignup:boolean = false;
+    export let isSignup:boolean = false;
 
     $: joinPhrase = isSignup ? 'Sign-Up':'Login';
 

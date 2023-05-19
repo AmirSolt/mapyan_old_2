@@ -10,13 +10,14 @@
     $: ({supabaseAuthClient} = $page.data)
 
 
+
+
+
     async function signUpForm(e){
         const form = e.target
         let formData = new FormData(form)
         usedEmail = formData.get('email')?.toString()?? ''
-
         let response = await signup(supabaseAuthClient, formData)
-
         stepIndex = 1;
     }
     async function verifyTokenForm(e) {
@@ -34,13 +35,16 @@
 
 {#if stepIndex==0}
 
+
     <form on:submit|preventDefault={signUpForm}>
         <label for="email">Email</label>
         <input type="email" name="email" id="email" required>
         <label for="password">Password</label>
         <input type="password" name="password" id="password" required>
         <button class="btn variant-filled" type="submit">Sign Up</button>
-        <HCaptcha />
+
+        
+        <HCaptcha  />
     </form>
 
    

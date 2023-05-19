@@ -10,15 +10,16 @@ export const GET = async ({ locals: { getSession, supabaseAuthServer } }) => {
         throw error(400, "Something went wrong.")
 
 
+
     const { data, error:errDelete } = await supabaseAuthServer.auth.admin.deleteUser(
         user_id,
         true
     )
 
     if(errDelete)
-        throw error(400, "Something went wrong.")
+        throw error(400, "Something went wrong deleting account.")
 
 
-    throw redirect(303, "/api/logout")
+    throw redirect(307, "/")
 
 };

@@ -100,6 +100,7 @@ async function getProductInformation(asin, domain){
         }
 
         product = {
+            "asin": tempProduct["asin"],
             "title": tempProduct["title"],
             "price":price,
             // "brand": tempProduct["brand"],
