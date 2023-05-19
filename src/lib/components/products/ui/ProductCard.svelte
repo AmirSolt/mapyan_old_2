@@ -13,7 +13,7 @@
 
     function addCompareProduct(){
         selectedProducts.update(
-            (list:[])=>{
+            (list)=>{
                 if(list.length>=MAX_COMPARE_LIST_SIZE){
                     return list;
                 }

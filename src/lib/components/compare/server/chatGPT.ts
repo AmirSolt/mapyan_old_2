@@ -1,8 +1,13 @@
 
 
 
-export const getResponse = async (message) => {
+export const getResponse = (sysMessage) => {
 
 
 }
 
+export const replaceProductNameWithLinks = (chatResponse) => {
+
+
+
+}

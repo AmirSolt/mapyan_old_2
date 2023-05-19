@@ -1,23 +1,24 @@
 
 <script lang="ts">
-    import { ProgressRadial } from '@skeletonlabs/skeleton';
-
-    let logoutLoading = false;
-
-
+    import AccountInfo from "$lib/components/account/ui/AccountInfo.svelte";
+    import CompareHistory from "$lib/components/account/ui/CompareHistory.svelte";
+    import Logout from "$lib/components/account/ui/Logout.svelte";
+    import UserDelete from "$lib/components/account/ui/UserDelete.svelte";
 </script>
 
 
+<h1>
 
-Account
+    Account
+</h1>
 
 
 
-
-<a on:click={()=>logoutLoading=true} href="/logout" class="btn variant-filled">
-    {#if !logoutLoading}
-        Logout
-    {:else}
-        <ProgressRadial  width="w-12" stroke={100} />
-    {/if}
-</a>
+<AccountInfo />
+<br>
+<CompareHistory />
+<br>
+<Logout />
+<br>
+<br>
+<UserDelete />

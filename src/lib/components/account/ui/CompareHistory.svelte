@@ -1,0 +1,50 @@
+
+<script lang='ts'>
+    import { Accordion, AccordionItem } from '@skeletonlabs/skeleton';
+    import {page} from '$app/stores';
+	
+    $: ({compare_instances} = $page.data)
+
+
+    function localize(date){
+        return new Date(date).toLocaleString()
+    }
+
+</script>
+
+<h2>
+    History
+</h2>
+
+
+{#if compare_instances}
+
+<Accordion>
+    {#each compare_instances as compare_instace}
+        <AccordionItem>
+            <svelte:fragment slot="lead">
+                (icon)
+            </svelte:fragment>
+            <svelte:fragment slot="summary">
+                <span>
+                    Comparision
+                </span>
+                <small>
+                   {localize(compare_instace.created_at)}
+                </small>
+            </svelte:fragment>
+            <svelte:fragment slot="content">
+                    {@html compare_instace.body}
+                    <ul>
+                        {#each compare_instace.asins as asin}
+                            <li>
+                                ASIN: {asin}
+                            </li>
+                        {/each}
+                    </ul>
+            </svelte:fragment>
+        </AccordionItem>
+    {/each}
+</Accordion>
+
+{/if}

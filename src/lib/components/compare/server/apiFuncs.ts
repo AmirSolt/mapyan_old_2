@@ -4,17 +4,7 @@
 
 
 
-export const updateAccount = (account) => {
-    console.log("updateAccount")
-  
-    if(!err)
-        throw new Error("could not update account")
-
-    return true
-}
-
-
-export const insertCompare = (account) => {
+export  const insertCompare = async () => {
     console.log("insertCompare")
     let compare = null
 
@@ -43,31 +33,23 @@ export const fetchSystemData = (selectedProducts) => {
 
 
 
+export const updateCredit = (supabaseService, user, credit) => {
+    const finalCredit = credit-1
+    const {data, error:err} = supabaseService.from('account').update({credit:finalCredit}).eq('id', user.id).single()
+    
+    if(err){
+        throw new Error("Something went wrong")
+    }
 
-
-
-
-
-
-
-export const fetchComparesByAccount = (account) => {
-    console.log("fetchComparesByAccount")
-    let compares:any[] = []
-
-
-    return compares
-
+    return finalCredit
 }
 
 
-export const fetchAccount = (user) => {
-    console.log("fetchAccount")
-    let account = null
 
-    account = "account"
 
-    if(!account)
-        throw new Error("account not found")
 
-    return account
-}
+
+
+
+
+

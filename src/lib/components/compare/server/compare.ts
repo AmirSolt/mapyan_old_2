@@ -1,23 +1,29 @@
 
 import * as validate from './validate'
 import * as apiFuncs from './apiFuncs'
-import {getResponse} from './chatGPT'
-
+import * as chatGPT from './chatGPT'
+import {supabaseService} from '$lib/server/apps/supabase'
 
 export const compare = (session, selectedProducts) => {
 
-    validate.userCheck(session);
-    validate.creditUpdateCheck();
+    let user = validate.userCheck(session);
+    let credit = validate.creditUpdateCheck(user, supabaseService);
 
-    apiFuncs.fetchSystemData(selectedProducts);
-
-    validate.tokenCountCheck(message);
-
-
-    getResponse(message);
-
-    apiFuncs.updateAccount();
+    let sysMessage = apiFuncs.fetchSystemData(selectedProducts);
+    validate.tokenCountCheck(sysMessage);
 
 
-    // remaining credits, response
+    let chatResponse = chatGPT.getResponse(sysMessage);
+    let finalResponse = chatGPT.replaceProductNameWithLinks(chatResponse);
+    
+
+
+    let finalCredit = apiFuncs.updateCredit(user, credit);
+    apiFuncs.insertCompare();
+
+
+    return {
+        finalResponse,
+        finalCredit
+    }
 }
