@@ -9,7 +9,7 @@ export const POST = async ({request, locals:{getSession}}) => {
     let session = await getSession()
 
 
-    let results = compare(session, selectedProducts)
+    let results = await compare(session, selectedProducts)
 
     return json(results)
 };

@@ -12,9 +12,9 @@
 <Modal bind:showModal={showPrompt}>
     {#if showPrompt}
         {#if !session?.user}
-            <button>
+            <a href="/auth" class="btn variant-filled">
                 Login
-            </button>
+            </a>
         {:else}
             <Compare />
         {/if}

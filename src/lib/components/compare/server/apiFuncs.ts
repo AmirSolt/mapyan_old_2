@@ -4,27 +4,34 @@
 
 
 
-export  const insertCompare = async () => {
-    console.log("insertCompare")
-    let compare = null
+export  const insertCompare = async (supabaseService, user, account_id, finalResponse, selectedProducts) => {
 
-    compare = "compare"
 
-    if(!compare)
-        throw new Error("Compare could not be created")
+    const asins = selectedProducts.map((product) => {
+        return product.asin
+    })
 
-    return compare
+    const {data, error:err} = supabaseService
+        .from('compare_instance')
+        .insert({account_id:account_id, body:finalResponse, asins:asins })
+        .eq('id', user.id)
+        .single()
+
+    if(err){
+        console.log("insertCompare error", err)
+    }
+
 }
 
 
-export const fetchSystemData = (selectedProducts) => {
+export const fetchSystemData = async (selectedProducts) => {
     console.log("fetchSystemData")
     let sysData = null
 
     sysData = "sysData"
 
     if(!sysData)
-        throw new Error("sysData not found")
+        console.log("sysData not found")
 
     return sysData
 }
@@ -32,16 +39,21 @@ export const fetchSystemData = (selectedProducts) => {
 
 
 
+export const fetchAccountCredit = async (supabaseService, user) => {
+    const {data, error:err} = await supabaseService.from('account').select('id, credit').eq('id', user.id).single()
 
-export const updateCredit = (supabaseService, user, credit) => {
-    const finalCredit = credit-1
-    const {data, error:err} = supabaseService.from('account').update({credit:finalCredit}).eq('id', user.id).single()
+    if(err){
+        console.log("SfetchAccountCredit error", err)
+    }
+    return data
+}
+
+export const updateCredit = async (supabaseService, user, finalCredit) => {
+    const {data, error:err} = await supabaseService.from('account').update({credit:finalCredit}).eq('id', user.id).single()
     
     if(err){
-        throw new Error("Something went wrong")
+        console.log("updateCredit error", err)
     }
-
-    return finalCredit
 }
 
 

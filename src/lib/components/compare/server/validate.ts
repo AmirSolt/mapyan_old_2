@@ -1,8 +1,5 @@
 
 
-
-
-
 export const userCheck = (session) => {
 
 
@@ -19,21 +16,10 @@ export const userCheck = (session) => {
 }
 
 
-export const creditCheck = (supabaseService, user) => {
+export const creditCheck = (credit) => {
 
-    const {data, error:err} = supabaseService.from('account').select('credit').eq('id', user.id).single()
 
-    // edge function call
-
-    if(err)
-        return {
-            status: 500,
-            body: {
-                error: "Something went wrong"
-            }
-        }
-
-    if(data.credit<1){
+    if(credit<1){
         return {
             status: 402,
             body: {
@@ -41,8 +27,6 @@ export const creditCheck = (supabaseService, user) => {
             }
         }
     }
-
-    return data.credit
     
 }
 
@@ -53,3 +37,5 @@ export const tokenCountCheck = (message) => {
 
 
 }
+
+
