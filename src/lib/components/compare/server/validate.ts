@@ -1,5 +1,5 @@
 
-import {FinalTokenCountLimit} from '$lib/utils/config'
+import {FinalTokenCountLimit, NumberOfCompareProducts} from '$lib/utils/config'
 import { getTokens } from './tokenizer'
 
 
@@ -37,35 +37,49 @@ export const creditCheck = (credit) => {
 
 
 
-export const cleanProductInfos = (productInfos) => {
 
-    let popIndex = 0;
 
-    while(getTokens(JSON.stringify(productInfos)) > FinalTokenCountLimit){
-        if(popIndex >= productInfos.length)
-            popIndex = 0;
 
-        removeBiggestTextFromReviews(productInfos, popIndex);
 
-        popIndex++;
-    }    
+
+export const cleanProduct = async (product) => {
+
+
+    while(getTokens(JSON.stringify(product)) > FinalTokenCountLimit/NumberOfCompareProducts){
+  
+        removeBiggestTextFromReviews(product);
+    }   
+
+    return product
 }
 
 
-function removeBiggestTextFromReviews(productInfos, index){
-
-
-
+function removeBiggestTextFromReviews(product){
     let biggestIndex = 0;
-    let biggestText = productInfos[index].top_reviews[0];
-
-    for(let i=1; i<productInfos[index].top_reviews.length; i++){
-        if(productInfos[index].top_reviews[i].length > biggestText.length){
+    let biggestText = product.top_reviews[0];
+    for(let i=1; i<product.top_reviews.length; i++){
+        if(product.top_reviews[i].length > biggestText.length){
             biggestIndex = i;
-            biggestText = productInfos[index].top_reviews[i];
+            biggestText = product.top_reviews[i];
         }
     }
-
-    productInfos[index].top_reviews.splice(biggestIndex, 1);
-
+    product.top_reviews.splice(biggestIndex, 1);
 }
+
+
+
+
+// const cleanProductInfos = (productInfos) => {
+
+//     let popIndex = 0;
+
+//     while(getTokens(JSON.stringify(productInfos)) > FinalTokenCountLimit){
+//         if(popIndex >= productInfos.length)
+//             popIndex = 0;
+
+//         removeBiggestTextFromReviews(productInfos, popIndex);
+
+//         popIndex++;
+//     }    
+// }
+

@@ -39,20 +39,20 @@ export async function getSearchResults(keyword, country){
 
 
 
-export async function getProductsByAsins(asins:string[], userCountry:string){
+// export async function getProductsByAsins(asins:string[], userCountry:string){
 
-    let domain = countryToDomain(userCountry)
+//     let domain = countryToDomain(userCountry)
 
-    let results=[];
-    await Promise.all(asins.map( asin => getProductInformation(asin, domain) )).then(
-        (values) => results = values
-    ).catch((error)=> console.log("Found an error in getProductsByAsins"))
+//     let results=[];
+//     await Promise.all(asins.map( asin => getProductInformation(asin, domain) )).then(
+//         (values) => results = values
+//     ).catch((error)=> console.log("Found an error in getProductsByAsins"))
 
 
-    // console.log(results)
+//     // console.log(results)
 
-    return results
-}
+//     return results
+// }
 
 
 // async function getProductByAsin(asin:string, domain:string){
@@ -69,7 +69,7 @@ export async function getProductsByAsins(asins:string[], userCountry:string){
 // }
 
 
-async function getProductInformation(asin, domain){
+export async function getProductInformation(asin, domain){
     let product:any = {};
 
     // console.log("//////////////////////////////////////")
@@ -215,7 +215,7 @@ function getReviewQueries(asin:string, domain:string){
 }
 
 
-function countryToDomain(country){
+export function countryToDomain(country){
     switch(country){
         case 'US':
             return 'amazon.com'

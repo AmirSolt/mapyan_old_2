@@ -27,6 +27,7 @@ export const getResponse = async (productInfos) => {
 async function getChatGPTResponse(messages) {
     
 
+    // =================== Validation ===================
     if (!messages) {
         throw new Error('no messages provided')
     }
@@ -45,35 +46,11 @@ async function getChatGPTResponse(messages) {
 
 
     // =================== Moderation =================== 
-    const moderationRes = await fetch('https://api.openai.com/v1/moderations', {
-        headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${PRIVATE_OPENAI_KEY}`
-        },
-        method: 'POST',
-        body: JSON.stringify({
-            input: messages[messages.length - 1].content
-        })
-    })
-    if (!moderationRes.ok) {
-        const err = await moderationRes.json()
-        throw new Error(err.error.message)
-    }
-
-    const moderationData = await moderationRes.json()
-    const [results] = moderationData.results
-
-    if (results.flagged) {
-        throw new Error('Query flagged by openai')
-    }
-
-
-
-  
+    // moderation is done after product cleaning
 
 
     // =================== Chat ===================
-
+    console.time("getChatGPTResponse")
     const chatRequestOpts: CreateChatCompletionRequest = {
         model: 'gpt-3.5-turbo',
         messages: messages,
@@ -89,9 +66,11 @@ async function getChatGPTResponse(messages) {
         body: JSON.stringify(chatRequestOpts)
     })
 
+    console.timeEnd("getChatGPTResponse")
 
 
-
+    // =================== Data extraction ===================
+    console.time("chat gpt data extraction")
     if (!chatResponse.ok) {
         const err = await chatResponse.json()
         throw new Error(err.error.message)
@@ -115,9 +94,37 @@ async function getChatGPTResponse(messages) {
     if (jsonResponse.choices.length === 0)
         throw new Error("No response from AI")
 
+    console.timeEnd("chat gpt data extraction")
 
     return jsonResponse.choices[0].message
 }
 
 
 
+
+
+export const getOpenAIModeration = async (text:string) => {
+
+    const moderationRes = await fetch('https://api.openai.com/v1/moderations', {
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${PRIVATE_OPENAI_KEY}`
+        },
+        method: 'POST',
+        body: JSON.stringify({
+            input: text
+        })
+    })
+    if (!moderationRes.ok) {
+        const err = await moderationRes.json()
+        throw new Error(err.error.message)
+    }
+
+    const moderationData = await moderationRes.json()
+    const [results] = moderationData.results
+
+    if (results.flagged) {
+        throw new Error('Query flagged by openai')
+    }
+
+}
