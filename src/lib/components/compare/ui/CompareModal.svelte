@@ -10,7 +10,7 @@
 </script>
 
 <Modal bind:showModal={showPrompt}>
-    <div class="flex justify-center items-center h-full w-full">
+    <div class="flex justify-center items-center">
 
         {#if !session?.user}
             <a href="/options/login" class="btn variant-filled">
