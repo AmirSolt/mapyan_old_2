@@ -24,20 +24,18 @@
 		bind:this={dialog}
 		on:close={() => (showModal = false)}
 		>
-		<div on:click|stopPropagation class="h-full">
-			<div class="absolute top-1 right-1">
+		<div on:click|stopPropagation class="relative h-full">
+			<div class="absolute top-1 right-1 h-0">
 				<!-- svelte-ignore a11y-autofocus -->
 				<button class="btn-icon variant-filled" autofocus on:click={() => dialog.close()}
 					><X /></button
 				>
 			</div>
 			<!-- <slot name="header" /> -->
-			<div class="h-full" style="max-height:80%">
+			<div class="h-full" >
 				<slot />
 			</div>
 
-			<br />
-			<br />
 		</div>
 	</dialog>
 {/if}

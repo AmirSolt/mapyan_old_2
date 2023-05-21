@@ -40,7 +40,16 @@
 			<p class="text-center">{compareProduct[key]}</p> 
 		</td>
 	{:else if typeof compareProduct[key] === 'number'}
-		<td class="badge variant-filled text-center">{compareProduct[key]}</td>
+		<!-- <td >
+			<p class="badge variant-soft text-center">
+
+				{compareProduct[key]}
+			</p>
+		</td> -->
+
+		<td>
+			<p class="text-center">{compareProduct[key]}</p> 
+		</td>
 	
 	{:else if typeof compareProduct[key] === 'undefined'}
 		<td class="">

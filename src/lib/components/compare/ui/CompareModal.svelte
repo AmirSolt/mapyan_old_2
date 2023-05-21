@@ -10,16 +10,18 @@
 </script>
 
 <Modal bind:showModal={showPrompt}>
-    <div class="flex justify-center items-center">
+    <div class="flex justify-center items-center h-full w-full">
 
         {#if !session?.user}
-            <a href="/options/login" class="btn variant-filled">
-                Login
-            </a>
-    
-            <a href="/options/signup" class="btn variant-ringed">
-                Sign-up
-            </a>
+            <div class="flex flex-col w-1/2 ">
+
+                <a href="/options/login" class="btn variant-filled m-4">
+                    Login
+                </a>
+                <a href="/options/signup" class="btn variant-ringed m-4">
+                    Sign-up
+                </a>
+            </div>
         {:else}
             <Compare />
         {/if}

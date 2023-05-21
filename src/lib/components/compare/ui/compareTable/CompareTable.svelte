@@ -28,16 +28,11 @@
 	
 	// ==================================
 	
-	function caseInsensitiveLookUp(obj: { [key: string]: any }, searchKey: string): any | undefined {
-		const lowercaseSearchKey = searchKey.toLowerCase();
-
-		for (const key in obj) {
-			if (obj.hasOwnProperty(key) && key.toLowerCase() === lowercaseSearchKey) {
-			return obj[key];
-			}
-		}
-
-		return undefined;
+	function getParameterCaseInsensitive(object, key) {
+		const asLowercase = key.toLowerCase();
+		return object[Object.keys(object)
+			.find(k => k.toLowerCase() === asLowercase)
+		];
 	}
 
 </script>
@@ -51,7 +46,7 @@
 			<tr>
 				<th>Product</th>
 				{#each compareProducts as compareProduct}
-					<CompareTableRow product={findProductByAsin(caseInsensitiveLookUp(compareProduct,'ASIN'))} />
+					<CompareTableRow product={findProductByAsin(getParameterCaseInsensitive(compareProduct,'asin'))} />
 				{/each}
 			</tr>
 

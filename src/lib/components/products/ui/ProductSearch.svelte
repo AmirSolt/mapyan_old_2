@@ -24,7 +24,7 @@
     <form class="flex w-full h-14 justify-center"  on:submit|preventDefault={()=>searchForm(searchInput, $userCountry)}>
         <div class="input-group input-group-divider grid-cols-[1fr_auto] variant-ringed ">
             <input type="text" placeholder="Search..." bind:value={searchInput} autocomplete="off" />
-            <button class="variant-filled-secondary"><Search /></button>
+            <button class="variant-filled-primary"><Search /></button>
         </div>
     </form>
 </div>    

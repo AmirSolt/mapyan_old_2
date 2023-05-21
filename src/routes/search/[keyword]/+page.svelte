@@ -5,8 +5,11 @@
 	import ProductSearch from '$lib/components/products/ui/ProductSearch.svelte';
 	import ProductCard from '$lib/components/products/ui/ProductCard.svelte';
 	import CompareBar from '$lib/components/compare/ui/CompareBar.svelte';
+	import CardsPlaceHolder from '$lib/components/products/ui/CardsPlaceHolder.svelte';
 
 </script>
+
+
 
 <ProductSearch {searchTerm} />
 
@@ -14,7 +17,7 @@
 
 <div class="my-5 w-full">
 	{#await streamed.products}
-    <!-- <CardsPlaceHolder /> -->
+			<CardsPlaceHolder />
 
     {:then products}
 		{#if products?.length === 0}

@@ -21,7 +21,7 @@ export const compare = async (session, selectedProducts, country) => {
     validate.creditCheck(account.credit);
 
    
-    // let cleanProducts = await Promise.all(asins.map( asin => getCleanProductByAsin(asin, domain) ))
+    let cleanProducts = await Promise.all(asins.map( asin => getCleanProductByAsin(asin, domain) ))
 
 
     let finalResponse = await chatGPT.getResponse(cleanProducts);
