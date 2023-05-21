@@ -2,6 +2,7 @@
 <script lang='ts'>
     import { Accordion, AccordionItem } from '@skeletonlabs/skeleton';
     import {page} from '$app/stores';
+    import CompareTable from '$lib/components/compare/ui/compareTable/CompareTable.svelte'
 	
     $: ({compare_instances} = $page.data)
 
@@ -34,14 +35,17 @@
                 </small>
             </svelte:fragment>
             <svelte:fragment slot="content">
-                    {@html compare_instace.body}
-                    <ul>
+
+                    <CompareTable compareProductsRaw={compare_instace.body} />
+
+                    
+                    <!-- <ul>
                         {#each compare_instace.asins as asin}
                             <li>
                                 ASIN: {asin}
                             </li>
                         {/each}
-                    </ul>
+                    </ul> -->
             </svelte:fragment>
         </AccordionItem>
     {/each}

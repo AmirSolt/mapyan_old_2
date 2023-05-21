@@ -39,8 +39,8 @@
         <!-- Media -->
         <header class="flex justify-center items-center">
             <a href="{product.link}" id="media" target="_blank" rel="noopener">
-                <div class="flex items-center drop-shadow-lg rounded-lg" style="background-color:#f7f7f7;">
-                    <img src="{product.image}" alt="Thumbnail" class="rounded-lg " loading="lazy">
+                <div class="flex justify-center items-center w-60 h-64 p-4 drop-shadow-lg rounded-lg" style="background-color:#ffffff;">
+                    <img class="max-w-full max-h-full" src="{product.image}" alt="Thumbnail" loading="lazy">
                 </div>
             </a>
         </header>
@@ -48,7 +48,7 @@
 
         <div id="info">
         
-            <div id="title" class="row">
+            <div id="brand" class="row">
                 {#if 'brand' in product}
                 <small>{product.brand}</small>
                 {/if}
@@ -62,7 +62,9 @@
             </div>
             <!-- Title -->
             <div id="title" class="row">
-                <p>{product.title}</p>
+                <a href="{product.link}" id="media" target="_blank" rel="noopener">
+                    <p>{product.title}</p>
+                </a>    
             </div>
             <br>
             <!-- Prices -->

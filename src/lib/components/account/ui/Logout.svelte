@@ -14,7 +14,7 @@
 </h2>
 
 
-<a on:click={()=>logoutLoading=true} href="/api/logout" class="btn variant-filled">
+<a on:click={()=>logoutLoading=true} href="/api/logout" class="btn variant-ringed">
     {#if !logoutLoading}
         Logout
     {:else}

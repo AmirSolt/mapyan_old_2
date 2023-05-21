@@ -37,7 +37,7 @@
 
 
 	import { tweened } from 'svelte/motion';
-	let original = 1 * 60; // TYPE NUMBER OF SECONDS HERE
+	let original = 1.3 * 60; // TYPE NUMBER OF SECONDS HERE
 	let timer = tweened(original)
 	setInterval(() => {
 		if ($timer > 0) $timer--;

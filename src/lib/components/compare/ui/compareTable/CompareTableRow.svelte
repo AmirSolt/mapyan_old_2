@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { XCircle, CheckCircle2 } from 'lucide-svelte';
-	import { Avatar } from '@skeletonlabs/skeleton';
+	import ProductAvatar from '$lib/components/products/ui/ProductAvatar.svelte';
 
 
 	export let compareProduct: any=null;
@@ -13,8 +13,8 @@
 
 {#if product}
 	<td >
-		<a class="flex justify-center" href={product.link} target="_blank" rel="noopener">
-			<Avatar src={product.image} width="w-32" rounded="rounded-full" />
+		<a class="flex justify-center " href={product.link} target="_blank" rel="noopener">
+			<ProductAvatar imageUrl={product.image} />
 		</a>
 	</td>
 {/if}

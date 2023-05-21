@@ -31,7 +31,7 @@
 
 <h2>Delete your account</h2>
 <form on:submit|preventDefault={ confirmDelete }>
-    <button class="btn variant-filled" type="submit"> Delete Your Data</button>
+    <button class="btn variant-filled-error" type="submit"> Delete Your Data</button>
 </form>
 
 <ConfirmActionModal bind:showModal={showConfirmModal} prompt={confirmPrompt} confirmAction={deleteUser} />
