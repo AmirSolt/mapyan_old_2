@@ -6,7 +6,7 @@
 
 <div>
 
-    <div class="flex justify-center items-center bg-white w-32 h-32 p-2 rounded-lg">
+    <div class="flex justify-center items-center bg-white w-16 h-16 p-0 md:w-32 md:h-32 md:p-2 rounded-lg">
     
         <!-- <Avatar src={imageUrl} width="w-full" rounded="rounded-full" /> -->
     

@@ -36,16 +36,8 @@
             </svelte:fragment>
             <svelte:fragment slot="content">
 
-                    <CompareTable compareProductsRaw={compare_instace.body} />
+                    <CompareTable compareProductsRaw={compare_instace.table_data} />
 
-                    
-                    <!-- <ul>
-                        {#each compare_instace.asins as asin}
-                            <li>
-                                ASIN: {asin}
-                            </li>
-                        {/each}
-                    </ul> -->
             </svelte:fragment>
         </AccordionItem>
     {/each}

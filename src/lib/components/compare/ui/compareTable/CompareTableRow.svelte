@@ -36,9 +36,18 @@
 			</td>
 		{/if}
 	{:else if typeof compareProduct[key] === 'string'}
+
+		{#if key === "title"}
+			<td>
+				<p class="text-center truncate ">{compareProduct[key]}</p> 
+			</td>
+		{:else}
+
 		<td>
 			<p class="text-center">{compareProduct[key]}</p> 
 		</td>
+
+		{/if}
 	{:else if typeof compareProduct[key] === 'number'}
 		<!-- <td >
 			<p class="badge variant-soft text-center">

@@ -33,7 +33,7 @@ export const compare = async (session, selectedProducts, country) => {
 
     let finalCredit = account.credit - CompareCreditCost;
 
-    await updateDatabase(supabaseService, user, finalCredit, account.id, response, asins)
+    await updateDatabase(supabaseService, user, finalCredit, account.id, response)
 
 
 
@@ -59,8 +59,8 @@ export const getCleanProductByAsin = async (asin, domain) => {
 }
 
 
-export const updateDatabase = async (supabaseService, user, finalCredit, account_id, response, asins) => {
+export const updateDatabase = async (supabaseService, user, finalCredit, account_id, response) => {
 
-    await Promise.all([apiFuncs.updateCredit(supabaseService, user, finalCredit), apiFuncs.insertCompare(supabaseService, user, account_id, response, asins)]);
+    await Promise.all([apiFuncs.updateCredit(supabaseService, user, finalCredit), apiFuncs.insertCompare(supabaseService, user, account_id, response)]);
 
 }

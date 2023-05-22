@@ -33,7 +33,7 @@
         "ratings_total" in product
         }
 
-    <div id="product_card"  class=" flex flex-col justify-between  card drop-shadow-md !bg-transparent rounded-lg p-4 overflow-hidden"> 
+    <div id="product_card"  class=" flex flex-col justify-between  card drop-shadow-md !bg-transparent rounded-lg p-2 md:p-4 overflow-hidden"> 
 
 
         <!-- Media -->
@@ -53,18 +53,18 @@
                 <small>{product.brand}</small>
                 {/if}
             </div>
-            <br>
             <!-- Ratings -->
-            <div id="review" class="row flex items-center">
-                <StarRating rating={product.rating} />
-                <span class="mx-2">({product.ratings_total})</span>
-                
-            </div>
+            <br>
             <!-- Title -->
             <div id="title" class="row">
                 <a href="{product.link}" id="media" target="_blank" rel="noopener">
-                    <p>{product.title}</p>
+                    <p class="truncate " >{product.title}</p>
                 </a>    
+            </div>
+            <div id="review" class="row flex flex-col justify-center items-start">
+                <StarRating rating={product.rating} />
+                <small class="mx-2">({product.ratings_total})</small>
+                
             </div>
             <br>
             <!-- Prices -->
@@ -104,13 +104,15 @@
 
         <footer>
 
-            <div class='text-end w-full h-14'>
+            <br>
+
+            <div class='flex justify-end items-center  w-full'>
                 {#if $selectedProducts.find((item) => item.asin === product.asin) || $selectedProducts.length>=NumberOfCompareProducts}
-                    <button class="btn variant-filled w-1/2 h-full" type="button" on:click={addCompareProduct} disabled>
+                    <button class="btn variant-filled w-full h-10 md:w-3/4 md:h-12" type="button" on:click={addCompareProduct} disabled>
                         -
                     </button>
                 {:else}
-                    <button class="btn variant-filled w-1/2 h-full" type="button" on:click={addCompareProduct}>
+                    <button class="btn variant-filled w-full h-10 md:w-3/4 md:h-12" type="button" on:click={addCompareProduct}>
                         + Add
                     </button>
                 {/if}

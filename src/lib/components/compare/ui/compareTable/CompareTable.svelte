@@ -38,8 +38,8 @@
 </script>
 
 <!-- Responsive Container (recommended) -->
-<div class="table-container">
-	<table class="table table-hover table-compact">
+<div class="table-container ">
+	<table class="table table-hover table-fixed">
 		<tbody>
 
 			

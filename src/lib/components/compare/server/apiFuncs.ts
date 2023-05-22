@@ -43,12 +43,12 @@ export const updateCredit = async (supabaseService, user, finalCredit) => {
     }
 }
 
-export  const insertCompare = async (supabaseService, user, account_id, response, asins) => {
+export  const insertCompare = async (supabaseService, user, account_id, response) => {
 
 
     const {data, error:err} = await supabaseService
         .from('compare_instance')
-        .insert({account_id:account_id, body:response, asins:asins })
+        .insert({account_id:account_id, table_data:response })
 
 
     if(err){
