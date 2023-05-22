@@ -46,7 +46,7 @@
 
 <AppShell>
 
-	<svelte:fragment slot="header">
+	<svelte:fragment slot="pageHeader">
 		<header>
 				<Header />
 		</header>

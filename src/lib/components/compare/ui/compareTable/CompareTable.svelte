@@ -38,13 +38,20 @@
 </script>
 
 <!-- Responsive Container (recommended) -->
+
+
+
+
+
+
+
 <div class="table-container ">
-	<table class="table table-hover table-fixed">
+	<table class="table-hover table-auto" >
 		<tbody>
 
 			
 			<tr>
-				<th>Product</th>
+				<th class="w-16 ">Product</th>
 				{#each compareProducts as compareProduct}
 					<CompareTableRow product={findProductByAsin(getParameterCaseInsensitive(compareProduct,'asin'))} />
 				{/each}
@@ -52,7 +59,7 @@
 
 			{#each Object.keys(compareProducts[0]) as key}
 				<tr >
-					<th>{removeAllUnderscore(key)}</th>
+					<th class="w-16 ">{removeAllUnderscore(key)}</th>
 
 					{#each compareProducts as compareProduct}
 						<CompareTableRow {compareProduct} {key} />
@@ -62,3 +69,7 @@
 		</tbody>
 	</table>
 </div>
+
+
+<style>
+
