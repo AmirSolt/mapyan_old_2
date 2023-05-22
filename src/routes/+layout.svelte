@@ -53,7 +53,7 @@
 	</svelte:fragment>
 
 	<div class="flex justify-center w-full">
-		<div class="max-w-7xl p-4 w-full">
+		<div class="max-w-7xl p-2 w-full">
 			<slot />
 		</div>
 	</div>	

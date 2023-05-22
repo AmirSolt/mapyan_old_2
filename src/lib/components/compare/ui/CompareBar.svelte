@@ -19,9 +19,9 @@
 
 
 
-<div>
+<div  >
 
-	<div class="variant-soft">
+	<div class="variant-soft rounded-lg">
 		<ProgressBar rounded="rounded-t-lg" class="rounded-none" meter="bg-primary-500" height="h-4" value={progressValue} />
 	</div>
 	

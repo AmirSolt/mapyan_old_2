@@ -4,9 +4,12 @@
 </script>
 
 
-<div class="flex justify-center items-center variant-soft w-32 h-32 p-2 rounded-lg">
+<div>
 
-    <!-- <Avatar src={imageUrl} width="w-full" rounded="rounded-full" /> -->
-
-    <img  class="max-w-full max-h-full rounded-lg" src={imageUrl} alt="Product Avatar">
+    <div class="flex justify-center items-center bg-white w-32 h-32 p-2 rounded-lg">
+    
+        <!-- <Avatar src={imageUrl} width="w-full" rounded="rounded-full" /> -->
+    
+        <img  class="max-w-full max-h-full rounded-lg" src={imageUrl} alt="Product Avatar">
+    </div>
 </div>
