@@ -73,12 +73,12 @@
                 <div id="price" class="row">
 
                     <span class="text-2xl">
-                        {product.prices[0].currency} {product.prices[0].value}
+                        {product.prices[0].symbol}{product.prices[0].value}
                     </span>
 
                     {#if product.prices.length > 2}
                         <s>
-                            {product.price[1].currency} {product.price[1].value}
+                            {product.price[1].symbol}{product.price[1].value}
                         </s>
                     {/if}
 

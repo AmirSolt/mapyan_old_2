@@ -70,6 +70,9 @@ export async function getSearchResults(keyword, country){
 
 
 export async function getProductInformation(asin, domain){
+
+    console.time(`fetching ASIN: ${asin}`)
+
     let product:any = {};
 
     // console.log("//////////////////////////////////////")
@@ -101,13 +104,16 @@ export async function getProductInformation(asin, domain){
 
         product = {
             "asin": tempProduct["asin"],
-            "title": tempProduct["title"],
-            "price":price,
+            // "title": tempProduct["title"],
+            // "price":price,
             // "brand": tempProduct["brand"],
             // "categories": tempProduct["categories_flat"],
             // "description": tempProduct["description"],
             // "feature_bullets": tempProduct["feature_bullets_flat"],
+            // "specifications": tempProduct["specifications"],
             // "specifications": tempProduct["specifications_flat"],
+            // "rating": tempProduct["rating"],
+            // "ratings_total": tempProduct["ratings_total"],
             "top_reviews": reviews,
         }
         
@@ -115,6 +121,9 @@ export async function getProductInformation(asin, domain){
         console.log(error)
         console.log("Found an error in getProductInformation")
     })
+
+    console.timeEnd(`fetching ASIN: ${asin}`)
+
     return product
 }
 

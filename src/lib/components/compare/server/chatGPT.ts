@@ -5,7 +5,7 @@ import { ChatCompletionRequestMessageRoleEnum } from 'openai'
 import { getTokens } from './tokenizer'
 
 import { ChatGPTInstructions, ChatGPTTemprature } from '$lib/utils/config'
-
+import {error} from '@sveltejs/kit'
 
 
 export const getResponse = async (productInfos) => {
@@ -39,8 +39,10 @@ async function getChatGPTResponse(messages) {
         tokenCount += tokens
     })
 
+    console.log("Final token Count:",tokenCount)
+
     if (tokenCount >= 4000) {
-        throw new Error('Query too large')
+        throw error(400, {message: 'Token exceeds 4000'})
     }
 
 
@@ -50,7 +52,6 @@ async function getChatGPTResponse(messages) {
 
 
     // =================== Chat ===================
-    console.time("getChatGPTResponse")
     const chatRequestOpts: CreateChatCompletionRequest = {
         model: 'gpt-3.5-turbo',
         messages: messages,
@@ -66,14 +67,12 @@ async function getChatGPTResponse(messages) {
         body: JSON.stringify(chatRequestOpts)
     })
 
-    console.timeEnd("getChatGPTResponse")
 
 
     // =================== Data extraction ===================
-    console.time("chat gpt data extraction")
     if (!chatResponse.ok) {
         const err = await chatResponse.json()
-        throw new Error(err.error.message)
+        throw error(400, err.error.message)
     }
 
     const chunks = [];
@@ -92,9 +91,8 @@ async function getChatGPTResponse(messages) {
     const jsonResponse = JSON.parse(responseText);
 
     if (jsonResponse.choices.length === 0)
-        throw new Error("No response from AI")
+        throw error(400, "No response from AI")
 
-    console.timeEnd("chat gpt data extraction")
 
     return jsonResponse.choices[0].message
 }
@@ -117,14 +115,14 @@ export const getOpenAIModeration = async (text:string) => {
     })
     if (!moderationRes.ok) {
         const err = await moderationRes.json()
-        throw new Error(err.error.message)
+        throw error(400, err.error.message)
     }
 
     const moderationData = await moderationRes.json()
     const [results] = moderationData.results
 
     if (results.flagged) {
-        throw new Error('Query flagged by openai')
+        throw error(400, 'Query flagged by openai')
     }
 
 }

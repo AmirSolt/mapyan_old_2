@@ -1,20 +1,8 @@
+import {error} from '@sveltejs/kit'
 
 
 
 
-
-
-export const fetchSystemData = async (selectedProducts) => {
-    console.log("fetchSystemData")
-    let sysData = null
-
-    sysData = "sysData"
-
-    if(!sysData)
-        console.log("sysData not found")
-
-    return sysData
-}
 
 
 
@@ -23,18 +11,10 @@ export const fetchAccountCredit = async (supabaseService, user) => {
     const {data, error:err} = await supabaseService.from('account').select('id, credit').eq('id', user.id).single()
 
     if(err){
-        console.log("fetchAccountCredit error", err)
+        throw error(400, {message: 'Couldnt fetch account'})
     }
     return data
 }
-
-
-
-
-
-
-
-
 
 export const updateCredit = async (supabaseService, user, finalCredit) => {
     const {data, error:err} = await supabaseService.from('account').update({credit:finalCredit}).eq('id', user.id)
@@ -43,12 +23,12 @@ export const updateCredit = async (supabaseService, user, finalCredit) => {
     }
 }
 
-export  const insertCompare = async (supabaseService, user, account_id, response) => {
+export  const insertCompare = async (supabaseService, user, account_id, tableData) => {
 
 
     const {data, error:err} = await supabaseService
         .from('compare_instance')
-        .insert({account_id:account_id, table_data:response })
+        .insert({account_id:account_id, table_data:tableData })
 
 
     if(err){

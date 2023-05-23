@@ -36,7 +36,7 @@
             </svelte:fragment>
             <svelte:fragment slot="content">
 
-                    <CompareTable compareProductsRaw={compare_instace.table_data} />
+                    <CompareTable tableData={compare_instace.table_data} />
 
             </svelte:fragment>
         </AccordionItem>

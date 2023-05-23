@@ -1,19 +1,14 @@
 
 import {FinalTokenCountLimit, NumberOfCompareProducts} from '$lib/utils/config'
 import { getTokens } from './tokenizer'
-
+import {error} from '@sveltejs/kit'
 
 export const userCheck = (session) => {
 
 
 
     if(!session.user)
-        return {
-            status: 401,
-            body: {
-                error: "Unauthorized"
-            }            
-        }
+        throw error(400, {message: 'Not a user'})
     
     return session.user
 }
@@ -23,12 +18,7 @@ export const creditCheck = (credit) => {
 
 
     if(credit<1){
-        return {
-            status: 402,
-            body: {
-                error: "Not enough credits"
-            }
-        }
+        throw error(400, {message: 'Not enough credit'})
     }
     
 }
@@ -45,10 +35,18 @@ export const creditCheck = (credit) => {
 export const cleanProduct = async (product) => {
 
 
+    console.log("Token count:",getTokens(JSON.stringify(product)),"ASIN:",product.asin)
+
+
     while(getTokens(JSON.stringify(product)) > FinalTokenCountLimit/NumberOfCompareProducts){
   
         removeBiggestTextFromReviews(product);
     }   
+
+    console.log("Shaved Token count:",getTokens(JSON.stringify(product)),"ASIN:",product.asin)
+
+
+
 
     return product
 }
@@ -63,6 +61,7 @@ function removeBiggestTextFromReviews(product){
             biggestText = product.top_reviews[i];
         }
     }
+
     product.top_reviews.splice(biggestIndex, 1);
 }
 
