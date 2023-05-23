@@ -110,11 +110,11 @@ export async function getProductInformation(asin, domain){
             // "categories": tempProduct["categories_flat"],
             // "description": tempProduct["description"],
             // "feature_bullets": tempProduct["feature_bullets_flat"],
-            // "specifications": tempProduct["specifications"],
+            "specifications": tempProduct["specifications"],
             // "specifications": tempProduct["specifications_flat"],
             // "rating": tempProduct["rating"],
             // "ratings_total": tempProduct["ratings_total"],
-            "top_reviews": reviews,
+            // "top_reviews": reviews,
         }
         
     }).catch((error)=> {

@@ -34,6 +34,7 @@ export const compare = async (session, selectedProducts, country) => {
     const response = await JSON.parse(finalResponse.content)
     console.timeEnd("GPT response")
 
+    console.log("Response Keys:",Object.keys(response[0]))
 
     const tableData = table.convertToTableData(selectedProducts, response)
 

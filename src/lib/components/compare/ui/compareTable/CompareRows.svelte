@@ -25,31 +25,31 @@
 			{cellData}
 		{:else if typeof cellData === 'number'}
 
+		{cellData}
 
-
-				{#if cellData===0}
-					-
-				{/if}
-				{#if cellData===1}
-					<span class="text-rose-500 flex justify-center ">
-						<Angry />
-					</span>
-				{/if}
-				{#if cellData===2}
-					<span class="text-amber-500 flex justify-center ">
-						<Frown />
-					</span>
-				{/if}
-				{#if cellData===3}
-					<span class="text-gray-500 flex justify-center ">
-						<Meh />
-					</span>
-				{/if}
-				{#if cellData===4}
-					<span class="text-green-500 flex justify-center ">
-						<Smile />
-					</span>
-				{/if}
+			<!-- {#if cellData===0}
+				-
+			{/if}
+			{#if cellData===1}
+				<span class="text-rose-500 flex justify-center ">
+					<Angry />
+				</span>
+			{/if}
+			{#if cellData===2}
+				<span class="text-amber-500 flex justify-center ">
+					<Frown />
+				</span>
+			{/if}
+			{#if cellData===3}
+				<span class="text-gray-500 flex justify-center ">
+					<Meh />
+				</span>
+			{/if}
+			{#if cellData===4}
+				<span class="text-green-500 flex justify-center ">
+					<Smile />
+				</span>
+			{/if} -->
 		
 
 
