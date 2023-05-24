@@ -19,22 +19,22 @@
 
 
 
-<div  >
+<div class="sticky top-0 z-10" >
 
 	<div class="variant-soft rounded-lg">
-		<ProgressBar rounded="rounded-t-lg" class="rounded-none" meter="bg-primary-500" height="h-4" value={progressValue} />
+		<ProgressBar rounded="rounded-t-lg" class="rounded-none" meter="bg-primary-500" height="h-2" value={progressValue} />
 	</div>
 	
 	
-	<div class="card !bg-transparent p-2 md:p-4 rounded-t-none  flex flex-col md:flex-row justify-between items-center">
+	<div class="card p-2 md:p-4 rounded-t-none  flex flex-row justify-between items-center md:px-24">
 		
 
 
 
-		<div class="my-4 md:my-8">
+		<div class="">
 
 
-			<div class="flex justify-center items-center h-16  md:h-32">
+			<div class="flex justify-center items-center h-16 md:h-20">
 
 				{#each $selectedProducts as product}
 					<button
@@ -58,7 +58,7 @@
 	
 	
 	
-		<div class="w-1/2">
+		<div class="w-1/4">
 			{#if $selectedProducts.length > 0}
 				<button class="btn variant-filled-primary w-full" type="button" on:click={openCompareModal}>
 					Compare	

@@ -10,7 +10,7 @@
 	
 	import Header from '$lib/components/general/ui/Header.svelte'
 	import Footer from '$lib/components/general/ui/Footer.svelte';
-	import { AppShell } from '@skeletonlabs/skeleton';
+	// import { AppShell } from '@skeletonlabs/skeleton';
 
 
 	import { invalidate } from '$app/navigation';
@@ -44,24 +44,30 @@
 </svelte:head>
 
 
-<AppShell>
+<!-- <AppShell>
 
 	<svelte:fragment slot="pageHeader">
-		<header>
-				<Header />
-		</header>
-	</svelte:fragment>
-
-	<div class="flex justify-center w-full">
-		<div class="max-w-7xl p-2 w-full">
-			<slot />
-		</div>
-	</div>	
-	
-	<svelte:fragment slot="footer">
-		<footer>
-			<Footer />
-		</footer>
 		
 	</svelte:fragment>
-</AppShell>
+
+	
+	
+	<svelte:fragment slot="footer">
+		
+		
+	</svelte:fragment>
+</AppShell> -->
+
+<header>
+	<Header />
+</header>
+
+<div class="flex justify-center w-full">
+	<div class="max-w-7xl p-2 w-full">
+		<slot />
+	</div>
+</div>	
+
+<footer>
+	<Footer />
+</footer>
