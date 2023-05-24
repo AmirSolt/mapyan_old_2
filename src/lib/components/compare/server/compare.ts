@@ -99,9 +99,25 @@ function csvToJson(csv){
         var obj = {};
         var currentline=lines[i].split(",");
         for(let j=1;j<headers.length;j++){
-            obj[headers[j]] = currentline[j];
+            let data = convertDataType(currentline[j])
+            obj[headers[j]] = data;
         }
         result[currentline[0]] = obj
     }
     return result
+}
+
+
+function convertDataType(dataPoint){
+
+    if(dataPoint=="true")
+        return true
+    if(dataPoint=="false")
+        return false
+    if(dataPoint.toLowerCase()=="unknown")
+        return null
+    if(dataPoint=="null")
+        return null
+
+    return dataPoint
 }

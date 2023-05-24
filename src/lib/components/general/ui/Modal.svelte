@@ -25,11 +25,13 @@
 		on:close={() => (showModal = false)}
 		>
 		<div on:click|stopPropagation class="h-full">
-			<div class="absolute top-1 right-1 h-0">
-				<!-- svelte-ignore a11y-autofocus -->
-				<button class="btn-icon variant-filled" autofocus on:click={() => dialog.close()}
-					><X /></button
-				>
+			<div class="sticky top-0 h-0">
+				<div class="flex justify-end p-1">
+					<!-- svelte-ignore a11y-autofocus -->
+					<button class="btn-icon variant-filled-error" autofocus on:click={() => dialog.close()}
+						><X /></button
+					>
+				</div>
 			</div>
 			<!-- <slot name="header" /> -->
 			<div class="h-full" >

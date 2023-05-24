@@ -22,22 +22,28 @@
 				</span>
 			{/if}
 		{:else if typeof cellData === 'string'}
-			{cellData}	
+
 			{#if cellData==="bad"}
 				<span class="text-rose-500 flex justify-center ">
 					<Angry />
 				</span>
-			{/if}
-			{#if cellData==="ok"}
-				<span class="text-amber-500 flex justify-center ">
+			{:else if cellData==="ok"}
+				<span class="text-gray-500 flex justify-center ">
 					<Meh />
 				</span>
-			{/if}
-			{#if cellData==="good"}
-				<span class="text-gray-500 flex justify-center ">
+			{:else if cellData==="good"}
+				<span class="text-green-500 flex justify-center ">
 					<Smile />
 				</span>
+			{:else}
+
+				{cellData}	
+	
 			{/if}
+
+
+
+
 		{:else if typeof cellData === 'number'}
 			{cellData}
 		{:else if typeof cellData === 'undefined'}

@@ -23,14 +23,13 @@ export const ChatGPTTemprature = 0.3 // lower more coherence, higher more creati
 
 export const ChatGPTInstructions=`
 Create a product comparison table.
-Use the information in products to come up with 10 features.
+Use the information in products to come up with 7 features.
 Use information in reviews to give qualifying answers.
 Features must help customers compare the products.
 Don't use title, brand or review as a feature.
-If you can't find enough information use null.
 If answer is boolean use true or false.
 If answer is qualifying use either "bad" or "ok" or "good".
-If answer is "Unkown" use null instead.
+If you can't find an answer use "-".
 Respond only in correct csv.
 Use this template:
 asin,[feature_name],[feature_name],...

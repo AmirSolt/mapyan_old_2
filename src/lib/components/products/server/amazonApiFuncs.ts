@@ -229,7 +229,7 @@ function getReviewQueries(asin:string, domain:string){
         review_formats: "all_formats",
         reviewer_type: "all",
         global_reviews: "true",
-        review_media_type: "media_reviews_only",
+        review_media_type: "all_reviews",
         sort_by: "most_helpful",
         page: "1",
         output: "json",
