@@ -26,7 +26,7 @@
 	</div>
 	
 	
-	<div class="card p-2 md:p-4 rounded-t-none  flex flex-row justify-between items-center md:px-24">
+	<div class="card variant-soft backdrop-blur-md p-2 md:p-4 rounded-t-none  flex flex-row justify-between items-center md:px-24">
 		
 
 

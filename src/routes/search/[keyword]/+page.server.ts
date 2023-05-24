@@ -1,7 +1,7 @@
 
 import {searchSchema} from '$lib/utils/schemas';
 import {getSearchResults} from '$lib/components/products/server/amazonApiFuncs'
-
+import {error} from '@sveltejs/kit'
 export const load = async ({params, url }) => {
 
     const {keyword} = params;
@@ -9,20 +9,15 @@ export const load = async ({params, url }) => {
     
  
     if(!searchSchema.safeParse({country, keyword}).success){
-        return{
-            searchTerm:keyword,
-            status: 400,
-            streamed: {products: []}
-        }
+        throw error(400, "search term is not valid")
     }
 
 
 
     return{
         searchTerm: keyword,
-        streamed:{
-            products: getSearchResults(keyword, country)
-        }
+        streamed: {products: getSearchResults(keyword, country)}
+
     }
 
 };

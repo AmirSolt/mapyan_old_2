@@ -21,8 +21,7 @@
         )
     }
 
-
-
+     
 </script>
 
 
@@ -39,7 +38,7 @@
         <!-- Media -->
         <header class="flex justify-center items-center">
             <a href="{product.link}" id="media" target="_blank" rel="noopener">
-                <div class="flex justify-center items-center w-40 h-44 md:w-64 md:h-68 p-2 md:p-4 drop-shadow-lg rounded-lg bg-white">
+                <div class="flex justify-center items-center w-40 h-44 md:w-64 md:h-68 p-2 md:p-4 rounded-lg bg-white shadow-inner shadow-gray-800/90">
                     <img class="max-w-full max-h-full" src="{product.image}" alt="Thumbnail" loading="lazy">
                 </div>
             </a>
@@ -48,19 +47,20 @@
 
         <div id="info">
         
+            <br>
+            <!-- brand -->
             <div id="brand" class="row">
                 {#if 'brand' in product}
                 <small>{product.brand}</small>
                 {/if}
             </div>
-            <!-- Ratings -->
-            <br>
             <!-- Title -->
             <div id="title" class="row">
                 <a href="{product.link}" id="media" target="_blank" rel="noopener">
                     <p class="truncate " >{product.title}</p>
                 </a>    
             </div>
+            <!-- Ratings -->
             <div id="review" class="row flex flex-col justify-center items-start">
                 <StarRating rating={product.rating} />
                 <small class="mx-2">({product.ratings_total})</small>
@@ -75,6 +75,15 @@
                     <span class="text-2xl">
                         {product.prices[0].symbol}{product.prices[0].value}
                     </span>
+
+                    <!-- is_prime -->
+                    <!-- {#if product.prices[0].is_prime}
+					<span class="text-blue-500">
+						<Check />
+					</span>
+					{:else}
+						-
+					{/if} -->
 
                     {#if product.prices.length > 2}
                         <s>

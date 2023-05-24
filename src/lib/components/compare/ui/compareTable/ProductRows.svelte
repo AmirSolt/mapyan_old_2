@@ -1,7 +1,7 @@
 <script lang="ts">
 	import ProductAvatar from '$lib/components/products/ui/ProductAvatar.svelte';
 	import StarRating from '$lib/components/products/ui/StarRating.svelte';
-
+	import {Check} from "lucide-svelte";
 	export let tableData: any[] = [];
 </script>
 
@@ -39,4 +39,22 @@
 			</div>
 		</td>
 	{/each}
+</tr>
+
+<tr>
+
+	<!-- <th class="">Prime</th>
+	{#each tableData as colData}
+		<td class="text-center ">
+			<div class="flex justify-center">
+					{#if colData.is_prime}
+					<span class="text-blue-500">
+						<Check />
+					</span>
+					{:else}
+						-
+					{/if}
+			</div>
+		</td>
+	{/each} -->
 </tr>

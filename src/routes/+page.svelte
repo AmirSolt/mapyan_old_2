@@ -12,3 +12,8 @@
 
 
 <Banner />
+
+
+<p>
+    We may receive a commision when you click on our links to make a purchase.
+</p>
