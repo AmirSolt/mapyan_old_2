@@ -1,6 +1,6 @@
 
 import {PRIVATE_AMAZON_SCRAPER_API_KEY} from '$env/static/private'
-
+import {error} from '@sveltejs/kit'
 const API_URL = 'https://api.asindataapi.com/request'
 const AFFILIATE_CODE = "mapyan-20"
 
@@ -18,15 +18,14 @@ export async function getSearchResults(keyword, country){
 
         if(!("search_results" in data)){
             console.log(data)
-            throw new Error("No search_results in data")
+            throw error(400, "No search_results key in data")
         }
         products = data["search_results"]
 
 
 
-    }).catch((error)=> {
-        console.log(error)
-        console.log("Found an error in getSearchResults")
+    }).catch((err)=> {
+        throw error(400, `There was an error in amazon search: ${err}`)
     })
     return products
 }
@@ -117,9 +116,8 @@ export async function getProductInformation(asin, domain){
             // "top_reviews": reviews,
         }
         
-    }).catch((error)=> {
-        console.log(error)
-        console.log("Found an error in getProductInformation")
+    }).catch((err)=> {
+        throw error(400, `There was an error in fetching products: ${err}`)
     })
 
     console.timeEnd(`fetching ASIN: ${asin}`)
@@ -127,22 +125,30 @@ export async function getProductInformation(asin, domain){
     return product
 }
 
-// async function getReviews(asin, domain){
-//     let reviews:any[] = [];
-//     const url = addQueriesToURL(API_URL, getReviewQueries(asin, domain));
-//     await fetch(url, {
-//         method: 'GET',
-//     }).then(
-//         (response) => response.json()
-//     ).then((data)=>{
-//         reviews =  data["reviews"]
+export async function getReviews(asin, domain){
+    let reviews:any = {};
+    const url = addQueriesToURL(API_URL, getReviewQueries(asin, domain));
+    await fetch(url, {
+        method: 'GET',
+    }).then(
+        (response) => response.json()
+    ).then((data)=>{
         
-//     }).catch((error)=> {
-//         console.log(error)
-//         console.log("Found an error in getReviews")
-//     })
-//     return reviews
-// }
+        if(!("reviews" in data)){
+            throw error(400, "Could not fetch product reviews")
+        }
+
+        reviews = {
+            "asin": data.product.asin,
+            "title": data.product.title,
+            "reviews": data.reviews,
+        }
+
+    }).catch((err)=> {
+        throw error(400, `There was an error in fetching reviews: ${err}`)
+    })
+    return reviews
+}
 
 
 
@@ -210,13 +216,21 @@ function getProductQueries(asin:string, domain:string){
 
 function getReviewQueries(asin:string, domain:string){
 
+
+
+
     return{
         api_key: PRIVATE_AMAZON_SCRAPER_API_KEY,
         type: "reviews",
         amazon_domain: domain,
         asin: asin,
         associate_id: AFFILIATE_CODE,
+        review_stars: "all_stars",
+        review_formats: "all_formats",
         reviewer_type: "all",
+        global_reviews: "true",
+        review_media_type: "media_reviews_only",
+        sort_by: "most_helpful",
         page: "1",
         output: "json",
         include_html: "false"

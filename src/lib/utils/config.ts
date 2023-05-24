@@ -1,4 +1,4 @@
-export const FinalTokenCountLimit = 2000;
+export const FinalTokenCountLimit = 1500;
 export const NumberOfCompareProducts = 3;
 export const CompareCreditCost = 1;
 
@@ -16,7 +16,31 @@ export const CompareCreditCost = 1;
 
 
 
-export const ChatGPTTemprature = 0.2 // lower more coherence, higher more creativity
+export const ChatGPTTemprature = 0.3 // lower more coherence, higher more creativity
+
+
+
+
+export const ChatGPTInstructions=`
+Your role is to create a comparison table for a customer.
+You will be given reviews on these products that will help you compare the quality of these products.
+
+{ 
+    "asin":[asin],
+    "features":{
+        ...
+    }
+}
+`
+
+
+
+
+
+
+
+
+
 
 // ========================== Reviews comapre
 // export const ChatGPTInstructions=`
@@ -40,22 +64,22 @@ export const ChatGPTTemprature = 0.2 // lower more coherence, higher more creati
 
 
 // ========================== Specification comapre
-export const ChatGPTInstructions=`
-You will be given information about multiple products.
-Your purpose is to help customers purchase the best product.
-Come up with 10 features that are relevant to these products and answer for each product.
-You should answer in boolean or number. If you must answer in string don't exceed 3 words.
-You can only respond in correct json. This is a template for you to follow:
-[
-    {
-        "asin": [asin],
-        "features": {
-            ...
-        }
-    },
-    ...
-]
-`
+// export const ChatGPTInstructions=`
+// You will be given information about multiple products.
+// Your purpose is to help customers purchase the best product.
+// Come up with 10 features that are relevant to these products and answer for each product.
+// You should answer in boolean or number. If you must answer in string don't exceed 3 words.
+// You can only respond in correct json. This is a template for you to follow:
+// [
+//     {
+//         "asin": [asin],
+//         "features": {
+//             ...
+//         }
+//     },
+//     ...
+// ]
+// `
 /*
 To Change specs to review:
 1. change cleaning product function

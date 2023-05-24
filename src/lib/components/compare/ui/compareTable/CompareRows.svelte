@@ -25,9 +25,9 @@
 			{cellData}
 		{:else if typeof cellData === 'number'}
 
-		{cellData}
+		<!-- {cellData} -->
 
-			<!-- {#if cellData===0}
+			{#if cellData===0}
 				-
 			{/if}
 			{#if cellData===1}
@@ -49,7 +49,7 @@
 				<span class="text-green-500 flex justify-center ">
 					<Smile />
 				</span>
-			{/if} -->
+			{/if}
 		
 
 

@@ -32,9 +32,9 @@ export const creditCheck = (credit) => {
 
 
 
-export const cleanProduct = async (product) => {
+export const cleanProductInfo = async (productInfo) => {
 
-    return cleanProductSpecs(product)
+    return cleanProductReview(productInfo)
 }
 
 
@@ -48,6 +48,10 @@ const skipSpecList = [
     "Is Discontinued By Manufacturer",
 ]
 function cleanProductSpecs(product) {
+
+    // reviews api
+    // global
+    // helpful_votes or biggest text
 
     let cleanedProduct = {}
 
@@ -72,49 +76,54 @@ function cleanProductSpecs(product) {
 
 
 function cleanProductReview(product) {
-    console.log("Token count:", getTokens(JSON.stringify(product)), "ASIN:", product.asin)
 
-
-    while (getTokens(JSON.stringify(product)) > FinalTokenCountLimit / NumberOfCompareProducts) {
-
-        removeBiggestTextFromReviews(product);
+    let clean:any = {
+        "asin": product.asin,
+        "title": product.title,
     }
 
-    console.log("Shaved Token count:", getTokens(JSON.stringify(product)), "ASIN:", product.asin)
+    let review = product.reviews[getMostHelpfulReviewIndex(product)].body
+
+    clean["review"] = review
 
 
 
+    console.log("Token count:", getTokens(JSON.stringify(clean)), "ASIN:", product.asin)
 
-    return product
+
+
+    return clean
 }
 
-function removeBiggestTextFromReviews(product) {
-    let biggestIndex = 0;
-    let biggestText = product.top_reviews[0];
-    for (let i = 1; i < product.top_reviews.length; i++) {
-        if (product.top_reviews[i].length > biggestText.length) {
-            biggestIndex = i;
-            biggestText = product.top_reviews[i];
+
+function getMostHelpfulReviewIndex(product){
+
+    let mostHelpfulIndex = 0;
+    let mostHelpful = 0;
+
+    product.reviews.forEach( (review, i)=>{
+        if(mostHelpful < review.helpful_votes){
+            mostHelpfulIndex = i
+            mostHelpful = review.helpful_votes
         }
-    }
+    });
 
-    product.top_reviews.splice(biggestIndex, 1);
+
+    return mostHelpfulIndex
 }
 
+function getLargestReviewIndex(product){
+
+    let largestIndex = 0;
+    let largestSize = 0;
+
+    product.reviews.forEach( (review, i)=>{
+        if(largestSize < review.body.length){
+            largestIndex = i
+            largestSize = review.body.length
+        }
+    });
 
 
-
-// const cleanProductInfos = (productInfos) => {
-
-//     let popIndex = 0;
-
-//     while(getTokens(JSON.stringify(productInfos)) > FinalTokenCountLimit){
-//         if(popIndex >= productInfos.length)
-//             popIndex = 0;
-
-//         removeBiggestTextFromReviews(productInfos, popIndex);
-
-//         popIndex++;
-//     }
-// }
-
+    return largestIndex
+}

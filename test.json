@@ -1,44 +1,17 @@
 [
     {
-        ASIN: "B073HC4WYG",
-        size: "Medium",
-        material: "Good quality fabric",
-        compartments: "Multiple pockets, including a shoe compartment",
-        capacity: "Can hold a day's worth of gear for a basic gym workout",
-        handles: "Thick webbing handles with a velcro-closure",
-        shoulder_strap: "Adjustable shoulder strap with slightly lightweight plastic clips",
-        zipper: "Smooth 3-sided zipper with 2 zipper pulls",
-        outside_pocket: "One outside pocket with no closure",
-        reviews_loved: "Good quality fabric and multiple pockets",
-        reviews_hated: "Some reviewers found it smaller than expected",
-        recommended_to_buy: true
+      asin: 'B09M7PB3X4',
+      title: 'Ivory Bodywash Aloe Pump 1035mL',     
+      review: 'I ordered three Ivory body wash soap (aloe scent) and got an additional bottle of body wash of the same kind. So four in total. Not sure if that was a mistake or not but I really appreciate the extra body wash! That deserve five stars! Will be a while until I can order again. I have 4 litres of body wash to go through! Lol.'
     },
     {
-        ASIN: "B079QY79GC",
-        size: "Medium",
-        material: "Decent quality fabric",
-        compartments: "Multiple pockets, including a shoe compartment",
-        capacity: "Can hold a lot of stuff",
-        handles: "Comfortable to carry",
-        shoulder_strap: "Adjustable shoulder strap",
-        zipper: "Smooth zipper",
-        outside_pocket: "One water bottle pocket on the side",
-        reviews_loved: "Multiple pockets and spacious shoe compartment",
-        reviews_hated: "Some reviewers found it too large for ladies",
-        recommended_to_buy: true
+      asin: 'B00CIU07FI',
+      title: 'NIVEA Orange & Avocado Oil Body Wash, 500mL',
+      review: "I've been buying this product regularly for a few years, and even had it in my subscription. However, the last one I got made me cancel the subscription, and start looking for other products. They changed it dramatically: instead of creamy opaque white body wash, it now is some kind of liquidy almost transparent wash. They did not say on the bottle, that they are changing or improving the product, so, I guess, they just sneakily wanted the customers to use more, and run out faster. Or stopped doing quality control. Not only does it have worse coverage now, it's lathering worse, it is runnier, and my skin no longer feels that moisturised as before. I still had some previous bottles left, so I can definitely compare easily. In the picture: top - previous body wash, bottom left - most recently bought body wash, bottom right - two identically looking bottles."
     },
     {
-        ASIN: "B0BCJQZDHN",
-        size: "Medium",
-        material: "Good quality waterproof fabric",
-        compartments: "Bottom zippered compartment for shoes, side mesh pockets",
-        capacity: "Can hold everything needed for a gym workout",
-        handles: "Comfortable straps",
-        shoulder_strap: "No shoulder strap",
-        zipper: "Smooth zipper",
-        outside_pocket: "Multiple side pockets",
-        reviews_loved: "Multiple zippered compartments and waterproof fabric",
-        reviews_hated: "Some reviewers found the straps unbalanced",
-        recommended_to_buy: true
+      asin: 'B084PTXJFJ',
+      title: 'St. Ives Soothing Body Wash for dry skin Oatmeal & Shea Butter Made with 100% Natural Extracts 650 ml',
+      review: 'When you apply the Oatmeal and Shea Butter soothing body washes on your skin, a fabulous aroma of industrially manufactured perfume wrapped your whole body like a loyal lover. For one minute and thirty-two seconds, I feel like the most beautiful woman in the world who used to bathe in milk and honey. The texture is perfect, smooth and silky but not too viscous, runny or sticky. It moisturizes my skin, leaving it velvety and radiant and as I go to bed after a late-night shower the fragrance of a perfect product accompanies me into the sweetest dreams where Mark Antony and Julius Caesar engaged in a battle over my heart. The only hardship I experience is knowing that St. Ives sold their soul to Unicifer and their product is not as clean as it used to be but for the occasional sensation of all senses, I am willing to deviate from my ideals. I will buy it again, no doubt.'      
     }
-]
+  ]
