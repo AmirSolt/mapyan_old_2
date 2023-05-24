@@ -1,4 +1,4 @@
-export const FinalTokenCountLimit = 1500;
+export const FinalTokenCountLimit = 2000;
 export const NumberOfCompareProducts = 3;
 export const CompareCreditCost = 1;
 

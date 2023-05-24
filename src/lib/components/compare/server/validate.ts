@@ -85,7 +85,7 @@ function cleanProductReview(product) {
     let reviews = getReviewBodies(product.reviews)
     reviews = sortReviewsBySize(reviews)
 
-    clean["reviews"] = reviews.slice(0,3)
+    clean["reviews"] = reviews.slice(0,5)
 
     while(getTokens(JSON.stringify(clean)) > FinalTokenCountLimit/NumberOfCompareProducts){
         clean.reviews.pop()
