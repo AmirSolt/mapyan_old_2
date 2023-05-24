@@ -15,8 +15,11 @@
 <AppBar padding="p-2">
 
 		<svelte:fragment slot="lead">
-			<a class="flex gap-1 text-xl" href="/">
-				<Flame /> TL;DR
+			<a class="flex justify-center items-center gap-1 text-xl" href="/">
+				<img class="w-10 h-10" src="/logo.svg" alt="Logo">
+				<h1>
+					MAPYAN
+				</h1> 
 			</a>
 			
 		</svelte:fragment>
@@ -26,7 +29,7 @@
 
 			{#if user}
 				<a href="/account" class="btn variant-filled">
-					Account
+					<Home />
 				</a>
 			{:else}
 				<div class="flex gap-2">

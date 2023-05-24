@@ -1,5 +1,6 @@
 
 import * as schemas from "$lib/utils/schemas"
+import {error} from '@sveltejs/kit'
 
 import {PUBLIC_DOMAIN} from '$env/static/public'
 
@@ -10,10 +11,7 @@ export const signup = async (supabase, formData ) => {
     const password = req.password as string
 
     if(!schemas.signUpSchema.safeParse({email, password}).success){
-        return {
-            error: true,
-            message: "Invalid credentials"
-        }
+        throw error(400, "invalid credentials")
     }
 
     const { data, error: err } = await supabase.auth.signUp({
@@ -23,10 +21,7 @@ export const signup = async (supabase, formData ) => {
 
 
     if (err) {
-        return {
-            error: true,
-            message: "Authentification failed"
-        }
+        throw error(400, `Autherization failed: ${err}`)
     }
 
     return {
@@ -45,10 +40,7 @@ export const login = async (supabase, formData ) => {
     const password = req.password as string
 
     if(!schemas.signInSchema.safeParse({email, password}).success){
-        return {
-            error: true,
-            message: "Invalid credentials"
-        }
+        throw error(400, "invalid credentials")
     }
 
     const { data, error: err } = await supabase.auth.signInWithPassword({
@@ -57,10 +49,8 @@ export const login = async (supabase, formData ) => {
     })
 
     if (err) {
-        return {
-            error: true,
-            message: "Authentification failed"
-        }
+        throw error(400, `Autherization failed: ${err}`)
+
     }
 
     return {
@@ -77,10 +67,8 @@ export const verifyToken = async (supabaseAuthClient, formData ) => {
     const token = req.token as string
 
     if(!schemas.tokenVerifySchema.safeParse({email, token}).success){
-        return {
-            error: true,
-            message: "Invalid credentials"
-        }
+        throw error(400, "invalid credentials")
+
     }
 
     const { data, error: err } = await supabaseAuthClient.auth.verifyOtp({
@@ -92,10 +80,8 @@ export const verifyToken = async (supabaseAuthClient, formData ) => {
 
     
     if (err) {
-        return {
-            error: true,
-            message: "Authentification failed"
-        }
+        throw error(400, `Autherization failed: ${err}`)
+
     }
 
     return {
@@ -114,11 +100,8 @@ export const resetPasswordRequest = async (supabase, formData ) => {
     const email = req.email as string
 
     if(!schemas.resetPasswordReqSchema.safeParse({email}).success){
-        console.log("schema failed")
-        return {
-            error: true,
-            message: "Invalid credentials"
-        }
+        throw error(400, "invalid credentials")
+
     }
 
     const { data, error: err } = await supabase.auth.resetPasswordForEmail(
@@ -129,13 +112,8 @@ export const resetPasswordRequest = async (supabase, formData ) => {
     )
 
     if (err) {
-        console.log("resetPasswordRequest")
-        console.log(err)
-        console.log(data)
-        return {
-            error: true,
-            message: "Authentification failed"
-        }
+        throw error(400, `Autherization failed: ${err}`)
+
     }
 
     return {
@@ -150,17 +128,13 @@ export const updatePassword = async (supabase, formData ) => {
     const confirm_new_password = req.new_password as string
 
     if(new_password !== confirm_new_password){
-        return {
-            error: true,
-            message: "Passwords do not match"
-        }
+        throw error(400, "Passwords do not match")
+
     }
 
     if(!schemas.updatePasswordSchema.safeParse({new_password}).success){
-        return {
-            error: true,
-            message: "Invalid credentials"
-        }
+        throw error(400, "invalid credentials")
+
     }
 
     const { data, error: err } = await supabase.auth.updateUser(
@@ -168,10 +142,8 @@ export const updatePassword = async (supabase, formData ) => {
     )
 
     if (err) {
-        return {
-            error: true,
-            message: "Authentification failed"
-        }
+        throw error(400, `Autherization failed: ${err}`)
+
     }
 
     return {

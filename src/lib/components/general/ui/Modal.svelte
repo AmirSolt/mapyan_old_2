@@ -4,6 +4,9 @@
 	export let coverScreen: boolean = true;
 	let dialog: any;
 
+
+
+
 	$: if (dialog && showModal) dialog.showModal();
 
 	let dialogClass = coverScreen?
@@ -20,17 +23,17 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 {#if showModal}
 	<dialog
-		class="{dialogClass}"
+		class="{dialogClass} "
 		bind:this={dialog}
 		on:close={() => (showModal = false)}
 		>
-		<div on:click|stopPropagation class="h-full">
+		<div on:click|stopPropagation class="h-full ">
 			<div class="sticky top-0 h-0">
 				<div class="flex justify-end p-1">
 					<!-- svelte-ignore a11y-autofocus -->
-					<button class="btn-icon variant-filled-error" autofocus on:click={() => dialog.close()}
-						><X /></button
-					>
+					<button class="btn-icon variant-filled-error w-8 h-8" autofocus on:click={() => dialog.close()}>
+						<X />
+					</button>
 				</div>
 			</div>
 			<!-- <slot name="header" /> -->
@@ -74,3 +77,6 @@
 		}
 	}
 </style>
+
+
+

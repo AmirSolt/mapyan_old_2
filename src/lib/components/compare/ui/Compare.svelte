@@ -43,7 +43,49 @@
 
 	import { onMount } from 'svelte';
 	onMount(async () => {
-		getAIResponse();
+		// getAIResponse();
+
+
+		tableData = [
+    {
+        "asin": "B099HMVKMQ",
+        "image": "https://m.media-amazon.com/images/I/51KwTLjSMQL._AC_UL320_.jpg",
+        "link": "https://www.amazon.ca/Fire-7-Tablet/dp/B099HMVKMQ/ref=sr_1_1?keywords=tablet&qid=1684952078&sr=8-1&tag=mapyan09-20",
+        "rating": 4.2,
+        "ratings_total": 824,
+        "price_raw": "$79.99",
+        "response": {
+            "Display size": "7 inches",
+            "Battery life": "10 hours",
+            "Operating system": "-",
+            "Storage capacity": "16 GB",
+            "Child-friendly": "bad",
+            "Screen quality": "ok",
+            "GPS": false
+        }
+    },
+    {
+        "asin": "B09BG5LXWJ",
+        "image": "https://m.media-amazon.com/images/I/61NQHkhutyL._AC_UL320_.jpg",
+        "link": "https://www.amazon.ca/All-new-Fire-HD-8-tablet/dp/B09BG5LXWJ/ref=sr_1_2?keywords=tablet&qid=1684952078&sr=8-2&tag=mapyan09-20",
+        "rating": 4.2,
+        "ratings_total": 857,
+        "price_raw": "$119.99",
+        "response": {
+            "Display size": "8 inches",
+            "Battery life": "-",
+            "Operating system": "Android",
+            "Storage capacity": "32 GB",
+            "Child-friendly": "ok",
+            "Screen quality": "-",
+            "GPS": "-"
+        }
+    }
+]
+
+isLoading = false
+
+
 	});
 
 	

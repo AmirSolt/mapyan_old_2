@@ -1,27 +1,21 @@
+import {error} from '@sveltejs/kit'
+
+
+
 export const load = async ({ locals: { supabaseAuthServer, getSession } } ) => {
 
 
     const session = await getSession()
 
     if (!session.user){
-        return {
-            status: 401,
-            body: {
-                error: "Unauthorized"
-            }
-        }
+        throw error(400, "Not authorized!")
     }
 
     const { data:account, error: err } = await supabaseAuthServer.from('account').select('*, compare_instance(*)').eq('id', session.user.id).single()
 
     if (err){
-        console.log(err)
-        return {
-            status: 500,
-            body: {
-                error: "Something went wrong"
-            }
-        }
+        throw error(400, `Something went wrong! ${err}`)
+
     }
 
     return {

@@ -30,8 +30,8 @@
 </script>
 
 <svelte:head>
-	<title>TLDR</title>
-	<link rel="icon" href="https://fav.farm/🔥" />
+	<title>MAPYAN</title>
+	<link rel="icon" type="image/svg+xml" href="/logo.svg" />
 </svelte:head>
 
 <AppShell>
