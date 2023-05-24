@@ -22,27 +22,19 @@ export const ChatGPTTemprature = 0.3 // lower more coherence, higher more creati
 
 
 export const ChatGPTInstructions=`
-You are going to make a comparison table for a customer.
-You will be given information about products.
-This table should have atleast 20 features.
-Features must help customers compare these products.
-Don't use title, brand, asin or review as a feature.
-Use information given to you in title and reviews to come up features.
-If you can't find a feature in a review, use null.
+Create a product comparison table.
+Use the information in products to come up with 10 features.
+Use information in reviews to give qualifying answers.
+Features must help customers compare the products.
+Don't use title, brand or review as a feature.
+If you can't find enough information use null.
 If answer is boolean use true or false.
 If answer is qualifying use either "bad" or "ok" or "good".
-If answer is "unkown" use null.
-All products must have the same features.
+If answer is "Unkown" use null instead.
+Respond only in correct csv.
 Use this template:
-{
-   "[asin]":{
-        "[header_name]": [answer],
-         "[header_name]": [answer],
-         "[header_name]": [answer],
-        ....
-   },
-...
-}
+asin,[feature_name],[feature_name],...
+[asin_value],[feature_value].[feature_value]....
 `
 
 

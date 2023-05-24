@@ -36,7 +36,7 @@ export const compare = async (session, selectedProducts, country) => {
 
     // console.log("response:",finalResponse.content)
 
-    const response = JSON.parse(finalResponse.content)
+    const response = csvToJson(finalResponse.content)
     console.timeEnd("GPT response")
 
     // console.log("Response Keys:",Object.keys(response[0]))
@@ -91,30 +91,17 @@ export const updateDatabase = async (supabaseService, user, finalCredit, account
 
 
 
-function csvJSON(csv){
-
+function csvToJson(csv){
     var lines=csv.split("\n");
-  
-    var result = [];
-  
-    // NOTE: If your columns contain commas in their values, you'll need
-    // to deal with those before doing the next step 
-    // (you might convert them to &&& or something, then covert them back later)
-    // jsfiddle showing the issue https://jsfiddle.net/
+    var result = {};
     var headers=lines[0].split(",");
-  
-    for(var i=1;i<lines.length;i++){
-  
+    for(let i=1;i<lines.length;i++){
         var obj = {};
         var currentline=lines[i].split(",");
-  
-        for(var j=0;j<headers.length;j++){
+        for(let j=1;j<headers.length;j++){
             obj[headers[j]] = currentline[j];
         }
-  
-        result.push(obj);
-  
+        result[currentline[0]] = obj
     }
-  
     return result
-  }
+}

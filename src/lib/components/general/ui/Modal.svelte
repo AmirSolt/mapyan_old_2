@@ -24,7 +24,7 @@
 		bind:this={dialog}
 		on:close={() => (showModal = false)}
 		>
-		<div on:click|stopPropagation class="relative h-full">
+		<div on:click|stopPropagation class="h-full">
 			<div class="absolute top-1 right-1 h-0">
 				<!-- svelte-ignore a11y-autofocus -->
 				<button class="btn-icon variant-filled" autofocus on:click={() => dialog.close()}

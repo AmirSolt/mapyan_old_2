@@ -10,7 +10,7 @@
 
 	// ======================= Loading Logic ============================
 	import { tweened } from 'svelte/motion';
-	let original = 1.3 * 60; // TYPE NUMBER OF SECONDS HERE
+	let original = 40; // TYPE NUMBER OF SECONDS HERE
 	let timer = tweened(original);
 	setInterval(() => {
 		if ($timer > 0) $timer--;
@@ -67,7 +67,7 @@
 		<div class="flex flex-col justify-center items-center text-center">
 			<p class="text-2xl">Generating a comparison table</p>
 			<br />
-			<p>This usually takes up to a minute</p>
+			<p>This usually takes about 30 seconds</p>
 			<p>We are working to improve the loading speed.</p>
 			<p>Thank you for being patient.</p>
 		</div>
