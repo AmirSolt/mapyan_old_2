@@ -24,7 +24,7 @@
 {#if showDeleteGuide}
 
 <p class="text-rose-600">
-    To complete the deletion of your account, you should logout out of your account.
+    To complete the deletion, please logout.
 </p>
 
 {/if}

@@ -43,60 +43,7 @@
 
 	import { onMount } from 'svelte';
 	onMount(async () => {
-		// getAIResponse();
-
-		tableData = [
-    {
-        "asin": "B08YYSTK2Z",
-        "image": "https://m.media-amazon.com/images/I/614ljJ2q2jL._AC_UL400_.jpg",
-        "link": "https://www.amazon.ca/ROCKBROS-Photochromic-Sunglasses-Protection-Transitions/dp/B08YYSTK2Z/ref=sr_1_1?keywords=bicycle+glasses&qid=1684905630&sr=8-1&tag=mapyan-20",
-        "rating": 4.1,
-        "ratings_total": 174,
-        "price_raw": "$34.99",
-        "response": {
-            "photochromic": "true",
-            "polarized": "false",
-            "interchangeable lenses": "false",
-            "adjustable nose grips": "false",
-            "UV protection": "true",
-            "good for sports": "true"
-        }
-    },
-    {
-        "asin": "B084WS7SN3",
-        "image": "https://m.media-amazon.com/images/I/61GQyNjAjsL._AC_UL400_.jpg",
-        "link": "https://www.amazon.ca/Queshark-Unbreakable-Sunglasses-Interchangeable-Anti-UV400/dp/B084WS7SN3/ref=sr_1_2?keywords=bicycle+glasses&qid=1684905630&sr=8-2&tag=mapyan-20",
-        "rating": 4.3,
-        "ratings_total": 5921,
-        "price_raw": "$39.99",
-        "response": {
-            "photochromic": "false",
-            "polarized": "true",
-            "interchangeable lenses": "true",
-            "adjustable nose grips": "false",
-            "UV protection": "-",
-            "good for sports": "true",
-            "good for driving": "true"
-        }
-    },
-    {
-        "asin": "B07DGT8K2L",
-        "image": "https://m.media-amazon.com/images/I/51iuopeXsiL._AC_UL400_.jpg",
-        "link": "https://www.amazon.ca/ROCKBROS-Cycling-Sunglasses-Photochromic-Protection/dp/B07DGT8K2L/ref=sr_1_3?keywords=bicycle+glasses&qid=1684905630&sr=8-3&tag=mapyan-20",
-        "rating": 4.3,
-        "ratings_total": 1630,
-        "price_raw": "$36.99",
-        "response": {
-            "photochromic": "true",
-            "polarized": "false",
-            "interchangeable lenses": "false",
-            "adjustable nose grips": "true",
-            "UV protection": "true",
-            "good for sports": "true"
-        }
-    }
-]
-isLoading=false;
+		getAIResponse();
 	});
 
 	
@@ -105,7 +52,7 @@ isLoading=false;
 {#if isLoading}
 	<!-- <ProgressRadial width="w-12" stroke={100} /> -->
 
-	<div class="flex flex-col">
+	<div class="flex p-2 flex-col">
 		<LoadingAnim />
 		<br />
 		<ProgressBar

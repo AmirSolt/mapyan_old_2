@@ -15,15 +15,15 @@
 <CompareBar />
 
 <div class="my-5 w-full">
-
-
+	
+	
 	{#await streamed.products}
-
-	 <div class="grid gap-2 grid-cols-2 md:grid-cols-3 xl:grid-cols-4 grid-rows-3">
-		{#each Array(48) as _, i}
-				<CardPlaceHolder />
-		{/each}
-	</div>
+	
+	<div class="grid gap-2 grid-cols-2 md:grid-cols-3 xl:grid-cols-4 grid-rows-3">
+	   {#each Array(48) as _, i}
+			   <CardPlaceHolder />
+	   {/each}
+   </div>
 
 		
     {:then products}

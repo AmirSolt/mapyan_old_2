@@ -24,9 +24,20 @@
     <div class="max-w-2xl p-2 w-full">
         {#if showResetGuide}
 
-            <div>
+            <div class="card p-4">
+
+                <img class="w-20 h-20" src="/email.svg" alt="Email Icon">
+
+                <br>
+
+                <h1 class="text-2xl">
+                    Check your inbox
+                </h1>
+
+                <br>
+
                 <p>
-                    If the email you entered is associated with an account, you will receive an email with a link to reset your password.
+                    You will receive an email with a link to reset your password.
                 </p>
                 <p>
                     If you do not receive an email, please check your spam folder.
@@ -38,7 +49,7 @@
             <form on:submit|preventDefault={resetForm}>
                 <div>
                     <label for="email">Email</label>
-                    <input class=" w-full" type="email" name="email" id="email" required>
+                    <input class=" w-full" type="email" name="email" id="email" autocomplete="username" required>
                 </div>
                 <br>
                 <button class="btn variant-filled w-full" type="submit">Reset Password</button>

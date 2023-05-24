@@ -15,19 +15,29 @@
 </script>
 
 
-<Modal bind:showModal={showModal} coverScreen={false}>
+<Modal bind:showModal={showModal} coverScreen={true}>
 
-    <p>
-        {prompt}
-    </p>
+    <div class="flex justify-center items-center h-full w-full">
 
-    <button class="btn variant-filled" on:click={()=>actionConfirmed(cancelAction)}>
-        Cancel
-    </button>
+        <div class="flex flex-col justify-center items-center p-5">
+    
+            <p>
+                {prompt}
+            </p>
+        <br>
+        <br>
+            <div class="flex gap-2">
+                <button class="btn variant-filled" on:click={()=>actionConfirmed(cancelAction)}>
+                    Cancel
+                </button>
+            
+                <button class="btn variant-filled" on:click={()=>actionConfirmed(confirmAction)}>
+                    Confirm
+                </button>
+            </div>
+        </div>
+    </div>
 
-    <button class="btn variant-filled" on:click={()=>actionConfirmed(confirmAction)}>
-        Confirm
-    </button>
 
 
 </Modal>

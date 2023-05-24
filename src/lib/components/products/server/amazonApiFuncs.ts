@@ -2,7 +2,6 @@
 import {PRIVATE_AMAZON_SCRAPER_API_KEY} from '$env/static/private'
 import {error} from '@sveltejs/kit'
 const API_URL = 'https://api.asindataapi.com/request'
-const AFFILIATE_CODE = "mapyan-20"
 
 
 
@@ -22,7 +21,7 @@ export async function getSearchResults(keyword, country){
         }
         products = data["search_results"]
 
-
+        // products.forEach((product)=>product.link=swapUrlWithAFfiliate(product.link))
 
     }).catch((err)=> {
         throw error(400, `There was an error in amazon search: ${err}`)
@@ -168,12 +167,45 @@ export async function getReviews(asin, domain){
 
 
 
+// ================= ONE LINK dosnt work with amazon products. Dumbasses can't do anyth right
+// function swapUrlWithAFfiliate(url:string){
+//     const urlObj = new URL(url);
+//     swapDomain(urlObj);
+//     addAffiliateCodes(urlObj);
+//     return urlObj.toString();
+// }
+
+
+// function addAffiliateCodes(urlObj:URL){
+//     urlObj.searchParams.set('tag', AFFILIATE_CODE);
+//     return urlObj;
+// }
+
+// function swapDomain(urlObj:URL){
+//     urlObj.hostname = 'www.amazon.com';
+//     return urlObj;
+// }
 
 
 
 
 
-
+function changeDomainExt(url: string, newTld: string="com"): string {
+    const urlObj = new URL(url);
+    const { protocol, pathname, search } = urlObj;
+  
+    // Extract the existing domain
+    const domain = urlObj.hostname;
+  
+    // Replace the TLD with the new extension
+    const newDomain = domain.replace(/\.[^.]+$/, `.${newTld}`);
+  
+    // Reconstruct the URL with the new domain extension
+    const newUrl = `${protocol}//${newDomain}${pathname}${search}`;
+  
+    return newUrl;
+}
+  
 
 
 function addQueriesToURL(urlRaw, queries){
@@ -196,7 +228,7 @@ function getSearchQueries(keyword:string, domain:string){
         exclude_sponsored: "true",
         output: "json",
         include_html: "false",
-        associate_id: AFFILIATE_CODE,
+        associate_id: getAffiliateCode(domain),
         sort_by: "featured",
         page: "1"
     }
@@ -208,7 +240,7 @@ function getProductQueries(asin:string, domain:string){
         type: "product",
         amazon_domain: domain,
         asin: asin,
-        associate_id: AFFILIATE_CODE,
+        associate_id: getAffiliateCode(domain),
         output: "json",
         include_html: "false"
     }
@@ -224,7 +256,7 @@ function getReviewQueries(asin:string, domain:string){
         type: "reviews",
         amazon_domain: domain,
         asin: asin,
-        associate_id: AFFILIATE_CODE,
+        associate_id: getAffiliateCode(domain),
         review_stars: "all_stars",
         review_formats: "all_formats",
         reviewer_type: "all",
@@ -281,5 +313,17 @@ export function countryToDomain(country){
     }
 }
 
+
+function getAffiliateCode(domain){
+
+    switch(domain){
+        case 'amazon.com':
+            return 'mapyan-20'
+        case 'amazon.ca':
+            return 'mapyan09-20'
+        default:
+            return 'mapyan09-20'
+    }
+}
 
 
