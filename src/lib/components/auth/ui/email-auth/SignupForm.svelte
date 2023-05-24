@@ -32,33 +32,48 @@
 </script>
 
 
-
-{#if stepIndex==0}
-
-
-    <form on:submit|preventDefault={signUpForm}>
-        <label for="email">Email</label>
-        <input type="email" name="email" id="email" required>
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password" required>
-        <button class="btn variant-filled" type="submit">Sign Up</button>
-
+<div class="flex justify-center w-full">
+    <div class="max-w-2xl p-2 w-full">
+        {#if stepIndex==0}
         
-        <HCaptcha  />
-    </form>
+        
+            <form on:submit|preventDefault={signUpForm}>
+        
+                <div>
+                    <label for="email">Email</label>
+                    <input class="w-full" type="email" name="email" id="email" required>
+                    <br>
+                    <label for="password">Password</label>
+                    <input class="w-full" type="password" name="password" id="password" required>
+                </div>
+                <br>
+                <button class="btn variant-filled w-full" type="submit">Sign Up</button>
+                
+                <br>
+                <br>
+                <HCaptcha  />
+            </form>
+        
+           
+        
+        {:else if stepIndex==1}
+        
+        
+            <form on:submit|preventDefault={verifyTokenForm}>
+                <!-- <label for="email">Email</label> -->
+                <div>
+                    <input class="hidden w-full" type="email" name="email" id="email" bind:value={usedEmail} >
+                    <label for="token">Token</label>
+                    <input class="w-full" type="text" name="token" id="token" required>
+                </div>
+                <br>
+                <button class="btn variant-filled w-full" type="submit">Verify</button>
+            </form>
+        
+        
+        {/if}
+    </div>
+</div>
 
-   
-
-{:else if stepIndex==1}
 
 
-    <form on:submit|preventDefault={verifyTokenForm}>
-        <!-- <label for="email">Email</label> -->
-        <input class="hidden" type="email" name="email" id="email" bind:value={usedEmail} >
-        <label for="token">Token</label>
-        <input type="text" name="token" id="token" required>
-        <button class="btn variant-filled" type="submit">Verify</button>
-    </form>
-
-
-{/if}

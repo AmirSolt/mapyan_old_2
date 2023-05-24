@@ -19,15 +19,25 @@
 </script>
 
 
-<form on:submit|preventDefault={updatePasswordForm}>
-    <label for="new_password">New Password</label>
-    <input type="password" name="new_password" id="new_password" required>
 
-    <label for="confirm_new_password">Confirm New Password</label>
-    <input type="password" name="confirm_new_password" id="confirm_new_password" required>
-  
-    <button class="btn variant-filled" type="submit">Update Password</button>
-</form>
+<div class="flex justify-center w-full">
+    <div class="max-w-2xl p-2 w-full">
+        <form on:submit|preventDefault={updatePasswordForm}>
+        
+            <div>
+                <label for="new_password">New Password</label>
+                <input class=" w-full" type="password" name="new_password" id="new_password" required>
+                <br>
+                <label for="confirm_new_password">Confirm New Password</label>
+                <input class=" w-full" type="password" name="confirm_new_password" id="confirm_new_password" required>
+            </div>
+          
+            <br>
+            <button class="btn variant-filled w-full" type="submit">Update Password</button>
+        </form>
+    </div>
+</div>
+
 
 
 

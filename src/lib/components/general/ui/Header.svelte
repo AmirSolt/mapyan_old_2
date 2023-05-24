@@ -12,34 +12,37 @@
 
 
 
-<AppBar padding="p-4">
+<AppBar padding="p-2">
 
 		<svelte:fragment slot="lead">
-			<a class="flex gap-1" href="/">
+			<a class="flex gap-1 text-xl" href="/">
 				<Flame /> TL;DR
 			</a>
+			
 		</svelte:fragment>
 	
 		<svelte:fragment slot="trail" >
 			
-			<div class="mx-2">
-				<LightSwitch />
-			</div>
 
 			{#if user}
 				<a href="/account" class="btn variant-filled">
 					Account
 				</a>
 			{:else}
-				<a href="/options/login" class="btn variant-filled">
-					Login
-				</a>
-
-				<a href="/options/signup" class="btn variant-ringed">
-					Sign-up
-				</a>
+				<div class="flex gap-2">
+					<a href="/options/login" class="btn variant-filled">
+						Login
+					</a>
+					<a href="/options/signup" class="btn variant-ringed">
+						Sign-up
+					</a>
+				</div>
 			{/if}
 
 			
 		</svelte:fragment>
 </AppBar>
+
+<div class="flex p-4 justify-end">
+	<LightSwitch />
+</div>

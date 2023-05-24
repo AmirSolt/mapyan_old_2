@@ -19,18 +19,26 @@
 
 </script>
 
+<div class="flex justify-center w-full">
+    <div class="max-w-2xl p-2 w-full">
+        <form on:submit|preventDefault={loginForm}>
+            <div>
+                <label for="email">Email</label>
+                <input class="w-full" type="email" name="email" id="email" required>
+                <br>
+                <label for="password">Password</label>
+                <input class="w-full" type="password" name="password" id="password" required>
+            </div>
+            <br>
+            <button class="btn variant-filled w-full" type="submit">Login</button>
+          
+        </form>
+        
+        <br>
+        <a href="/reset-password/initiate" class="btn variant-ringed">
+            Forgot Password?
+        </a>
+    </div>
+</div>
 
-<form on:submit|preventDefault={loginForm}>
-    <label for="email">Email</label>
-    <input type="email" name="email" id="email" required>
-    <label for="password">Password</label>
-    <input type="password" name="password" id="password" required>
-  
-    <button class="btn variant-filled" type="submit">Login</button>
-  
-</form>
-
-<a href="/reset-password/initiate" class="btn variant-ringed">
-    Forgot Password?
-</a>
 

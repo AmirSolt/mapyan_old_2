@@ -20,27 +20,37 @@
 </script>
 
 
+<div class="flex justify-center w-full">
+    <div class="max-w-2xl p-2 w-full">
+        {#if showResetGuide}
 
-{#if showResetGuide}
-    <div>
-        <p>
-            If the email you entered is associated with an account, you will receive an email with a link to reset your password.
-        </p>
-        <p>
-            If you do not receive an email, please check your spam folder.
-        </p>
+            <div>
+                <p>
+                    If the email you entered is associated with an account, you will receive an email with a link to reset your password.
+                </p>
+                <p>
+                    If you do not receive an email, please check your spam folder.
+                </p>
+            </div>
+        
+        {:else}
+        
+            <form on:submit|preventDefault={resetForm}>
+                <div>
+                    <label for="email">Email</label>
+                    <input class=" w-full" type="email" name="email" id="email" required>
+                </div>
+                <br>
+                <button class="btn variant-filled w-full" type="submit">Reset Password</button>
+                <br>
+                <br>
+                <HCaptcha />
+            </form>
+
+
+        {/if}
     </div>
-
-{:else}
-
-
-<form on:submit|preventDefault={resetForm}>
-    <label for="email">Email</label>
-    <input type="email" name="email" id="email" required>
-  
-    <button class="btn variant-filled" type="submit">Reset Password</button>
-    <HCaptcha />
-</form>
+</div>
 
 
-{/if}
+

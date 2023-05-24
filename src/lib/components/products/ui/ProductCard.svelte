@@ -38,7 +38,7 @@
         <!-- Media -->
         <header class="flex justify-center items-center">
             <a href="{product.link}" id="media" target="_blank" rel="noopener">
-                <div class="flex justify-center items-center w-40 h-44 md:w-64 md:h-68 p-2 md:p-4 rounded-lg bg-white shadow-inner shadow-gray-800/90">
+                <div class="flex justify-center items-center w-40 h-44 md:w-72 md:h-74 p-2 md:p-4 rounded-lg bg-white shadow-inner shadow-gray-800/90">
                     <img class="max-w-full max-h-full" src="{product.image}" alt="Thumbnail" loading="lazy">
                 </div>
             </a>
@@ -66,7 +66,7 @@
                 <small class="mx-2">({product.ratings_total})</small>
                 
             </div>
-            <br>
+            <!-- <br> -->
             <!-- Prices -->
             <!-- check if product has prices -->
             {#if 'prices' in product && product.prices.length > 0}

@@ -7,18 +7,26 @@
 </script>
 
 
-<h1>
-
+<h1 class="text-4xl ">
     Account
 </h1>
 
+<br>
+<br>
 
-
-<AccountInfo />
+<div class="card p-4">
+    <AccountInfo />
+</div>
 <br>
-<CompareHistory />
+<div class="card p-4">
+    <CompareHistory />
+</div>
 <br>
-<Logout />
+<div class="card p-4">
+    <Logout />
+</div>
 <br>
 <br>
-<UserDelete />
+<div class="card p-4">
+    <UserDelete />
+</div>

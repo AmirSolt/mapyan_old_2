@@ -1,7 +1,8 @@
 <script lang="ts">
 	import ProductAvatar from '$lib/components/products/ui/ProductAvatar.svelte';
 	import StarRating from '$lib/components/products/ui/StarRating.svelte';
-	import {Check} from "lucide-svelte";
+	import {CornerUpRight} from 'lucide-svelte'
+
 	export let tableData: any[] = [];
 </script>
 
@@ -41,9 +42,10 @@
 	{/each}
 </tr>
 
-<tr>
 
-	<!-- <th class="">Prime</th>
+
+<!-- <tr>
+	<th class="">Prime</th>
 	{#each tableData as colData}
 		<td class="text-center ">
 			<div class="flex justify-center">
@@ -56,5 +58,5 @@
 					{/if}
 			</div>
 		</td>
-	{/each} -->
-</tr>
+	{/each}
+</tr> -->
