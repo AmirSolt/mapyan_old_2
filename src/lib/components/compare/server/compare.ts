@@ -34,12 +34,12 @@ export const compare = async (session, selectedProducts, country) => {
         throw error(400, {message: 'Got no response from AI'})
     }
 
-    console.log("response:",finalResponse.content)
+    // console.log("response:",finalResponse.content)
 
     const response = JSON.parse(finalResponse.content)
     console.timeEnd("GPT response")
 
-    console.log("Response Keys:",Object.keys(response[0]))
+    // console.log("Response Keys:",Object.keys(response[0]))
 
     const tableData = table.convertToTableData(selectedProducts, response)
 
@@ -81,8 +81,11 @@ export const getCleanProductByAsin = async (asin, domain) => {
 
 
 export const updateDatabase = async (supabaseService, user, finalCredit, account_id, tableData) => {
-
+    try{
     await Promise.all([apiFuncs.updateCredit(supabaseService, user, finalCredit), apiFuncs.insertCompare(supabaseService, user, account_id, tableData)]);
+    }catch(err){
+        throw error(400, `Could not get product data: ${err}`)
+    }
 
 }
 

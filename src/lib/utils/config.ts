@@ -22,14 +22,26 @@ export const ChatGPTTemprature = 0.3 // lower more coherence, higher more creati
 
 
 export const ChatGPTInstructions=`
-Your role is to create a comparison table for a customer.
-You will be given reviews on these products that will help you compare the quality of these products.
-
-{ 
-    "asin":[asin],
-    "features":{
-        ...
-    }
+You are going to make a comparison table for a customer.
+You will be given information about products.
+This table should have atleast 20 features.
+Features must help customers compare these products.
+Don't use title, brand, asin or review as a feature.
+Use information given to you in title and reviews to come up features.
+If you can't find a feature in a review, use null.
+If answer is boolean use true or false.
+If answer is qualifying use either "bad" or "ok" or "good".
+If answer is "unkown" use null.
+All products must have the same features.
+Use this template:
+{
+   "[asin]":{
+        "[header_name]": [answer],
+         "[header_name]": [answer],
+         "[header_name]": [answer],
+        ....
+   },
+...
 }
 `
 

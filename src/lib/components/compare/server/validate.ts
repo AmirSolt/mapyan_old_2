@@ -82,11 +82,15 @@ function cleanProductReview(product) {
         "title": product.title,
     }
 
-    let review = product.reviews[getMostHelpfulReviewIndex(product)].body
+    let reviews = getReviewBodies(product.reviews)
+    reviews = sortReviewsBySize(reviews)
 
-    clean["review"] = review
+    clean["reviews"] = reviews.slice(0,3)
 
-
+    while(getTokens(JSON.stringify(clean)) > FinalTokenCountLimit/NumberOfCompareProducts){
+        clean.reviews.pop()
+    }
+ 
 
     console.log("Token count:", getTokens(JSON.stringify(clean)), "ASIN:", product.asin)
 
@@ -96,34 +100,36 @@ function cleanProductReview(product) {
 }
 
 
-function getMostHelpfulReviewIndex(product){
+// function getMostHelpfulReviewIndex(product){
 
-    let mostHelpfulIndex = 0;
-    let mostHelpful = 0;
+//     let mostHelpfulIndex = 0;
+//     let mostHelpful = 0;
 
-    product.reviews.forEach( (review, i)=>{
-        if(mostHelpful < review.helpful_votes){
-            mostHelpfulIndex = i
-            mostHelpful = review.helpful_votes
-        }
-    });
+//     product.reviews.forEach( (review, i)=>{
+//         if(mostHelpful < review.helpful_votes){
+//             mostHelpfulIndex = i
+//             mostHelpful = review.helpful_votes
+//         }
+//     });
 
 
-    return mostHelpfulIndex
+//     return mostHelpfulIndex
+// }
+
+
+function getReviewBodies(reviewObjs:any[]){
+    return reviewObjs.map(r=>r.body) 
 }
 
-function getLargestReviewIndex(product){
 
-    let largestIndex = 0;
-    let largestSize = 0;
+function sortReviewsBySize(reviews:any[]){
 
-    product.reviews.forEach( (review, i)=>{
-        if(largestSize < review.body.length){
-            largestIndex = i
-            largestSize = review.body.length
-        }
+
+    reviews.sort(function(a, b) {
+        if(a.length > b.length) return -1
+        if(a.length < b.length) return 1
+        return 0
     });
 
-
-    return largestIndex
+    return reviews
 }

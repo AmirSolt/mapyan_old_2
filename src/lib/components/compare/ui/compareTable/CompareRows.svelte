@@ -22,38 +22,24 @@
 				</span>
 			{/if}
 		{:else if typeof cellData === 'string'}
-			{cellData}
-		{:else if typeof cellData === 'number'}
-
-		<!-- {cellData} -->
-
-			{#if cellData===0}
-				-
-			{/if}
-			{#if cellData===1}
+			{cellData}	
+			{#if cellData==="bad"}
 				<span class="text-rose-500 flex justify-center ">
 					<Angry />
 				</span>
 			{/if}
-			{#if cellData===2}
+			{#if cellData==="ok"}
 				<span class="text-amber-500 flex justify-center ">
-					<Frown />
-				</span>
-			{/if}
-			{#if cellData===3}
-				<span class="text-gray-500 flex justify-center ">
 					<Meh />
 				</span>
 			{/if}
-			{#if cellData===4}
-				<span class="text-green-500 flex justify-center ">
+			{#if cellData==="good"}
+				<span class="text-gray-500 flex justify-center ">
 					<Smile />
 				</span>
 			{/if}
-		
-
-
-
+		{:else if typeof cellData === 'number'}
+			{cellData}
 		{:else if typeof cellData === 'undefined'}
 			<span class="text-rose-500 flex justify-center">
 				-

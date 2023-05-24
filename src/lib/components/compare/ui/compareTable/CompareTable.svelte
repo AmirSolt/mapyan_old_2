@@ -21,11 +21,11 @@
 
 			<ProductRows {tableData} />
 
-			{#each Object.keys(tableData[0].features) as key}
+			{#each Object.keys(tableData[0].response) as key}
 				<tr>
 					<th class="">{removeAllUnderscore(key)}</th>
 					{#each tableData as colData}
-						<CompareRows {key} cellData={colData.features[key]} />
+						<CompareRows {key} cellData={colData.response[key]} />
 					{/each}
 				</tr>
 			{/each}
