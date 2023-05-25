@@ -11,12 +11,13 @@
 	import CardPlaceHolder from '$lib/components/products/ui/CardPlaceHolder.svelte'
 
 
-	$: searchTerm, resetProducts(), loadFromSearchCache();
+	let mounted:boolean = false;
+	$: searchTerm, mounted, resetProducts(), loadFromSearchCache();
 
-
-	// import { onMount } from 'svelte';
-	// onMount(()=>{
-	// })
+	import { onMount } from 'svelte';
+	onMount(()=>{
+		mounted=true;
+	})
 
 
 	function resetProducts(){
@@ -24,6 +25,9 @@
 	}
 
 	function loadFromSearchCache(){
+		if(!mounted)
+			return;
+
 		const key = `${$userAmazonDomain}/${searchTerm}`
 		searchCache.subscribe( (searches)=>{
 			if(key in searches){

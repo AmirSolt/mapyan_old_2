@@ -8,12 +8,14 @@ import { ChatGPTInstructions, ChatGPTTemprature } from '$lib/utils/config'
 import {error} from '@sveltejs/kit'
 
 
-export const getResponse = async (productInfos) => {
+export const getResponse = async (cleanInputProducts, userInput) => {
 
+
+    const systemPrompt:string = ChatGPTInstructions + "\n Products:" + JSON.stringify(cleanInputProducts) ;
 
     const messages: ChatCompletionRequestMessage[] = [
-        { role: ChatCompletionRequestMessageRoleEnum.System, content: ChatGPTInstructions },
-        { role: ChatCompletionRequestMessageRoleEnum.User, content: JSON.stringify(productInfos)}
+        { role: ChatCompletionRequestMessageRoleEnum.System, content:systemPrompt},
+        { role: ChatCompletionRequestMessageRoleEnum.User, content: JSON.stringify(userInput)}
     ]
 
     const reponse = await getChatGPTResponse(messages)
@@ -48,8 +50,7 @@ async function getChatGPTResponse(messages) {
 
 
     // =================== Moderation =================== 
-    // moderation is done after product cleaning
-
+    await getOpenAIModeration(JSON.stringify(messages))
 
     // =================== Chat ===================
     const chatRequestOpts: CreateChatCompletionRequest = {
@@ -101,7 +102,7 @@ async function getChatGPTResponse(messages) {
 
 
 
-export const getOpenAIModeration = async (text:string) => {
+const getOpenAIModeration = async (text:string) => {
 
     const moderationRes = await fetch('https://api.openai.com/v1/moderations', {
         headers: {

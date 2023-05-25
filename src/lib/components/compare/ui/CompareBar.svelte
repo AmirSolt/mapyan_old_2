@@ -5,9 +5,20 @@
 	import CompareModal from './CompareModal.svelte';
 	let showPrompt: boolean = false;
 
-	import { selectedProducts } from '$lib/utils/stores';
+	import { selectedProducts, productReviewsCache, userAmazonDomain } from '$lib/utils/stores';
+
+
 	function removeCompareProduct(product) {
-		selectedProducts.update((list) => list.filter((item) => item.asin !== product.asin));
+		selectedProducts.update((list) => {
+			return list.filter((item) => item.asin !== product.asin)
+		});
+		productReviewsCache.update((reviews)=>{
+			const key:string = `${$userAmazonDomain}/${product.asin}`
+			if(key in reviews)
+				delete reviews[key]
+			return reviews
+		})
+
 	}
 
 	$: progressValue = ($selectedProducts.length / 3) * 100;

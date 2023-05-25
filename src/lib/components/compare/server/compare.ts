@@ -4,20 +4,14 @@ import * as apiFuncs from './apiFuncs'
 import * as chatGPT from './chatGPT'
 import * as table from './table'
 import {supabaseService} from '$lib/server/apps/supabase'
-import {getProductInformation, getReviews, countryToDomain} from '$lib/server/amazonAPI/funcs'
+// import {getProductInformation, getReviews, countryToDomain} from '$lib/server/amazonAPI/funcs'
 import {error} from '@sveltejs/kit'
 import { CompareCreditCost } from '$lib/utils/config'
 
 
-export const compare = async (session, selectedProducts, country) => {
+export const compare = async (session, selectedProducts, inputProducts, userInput) => {
 
     // ========================== Check creds ============================
-    const domain = countryToDomain(country)
-
-    const asins = selectedProducts.map((product) => {
-        return product.asin
-    })
-
     let user = validate.userCheck(session);
 
     let account = await apiFuncs.fetchAccountCredit(supabaseService, user)
@@ -25,24 +19,20 @@ export const compare = async (session, selectedProducts, country) => {
     // =================================================================
 
 
-    console.time("Product fetching")
-    let cleanProducts = await Promise.all(asins.map( asin => getCleanProductByAsin(asin, domain) ))
-    console.timeEnd("Product fetching")
 
-    console.log(cleanProducts)
+    let cleanInputProducts = await validate.cleanInputProducts(inputProducts)
+
+    console.log(cleanInputProducts)
+
+    throw error(400, "test")
 
     console.time("GPT response")
-    let finalResponse = await chatGPT.getResponse(cleanProducts);
+    let finalResponse = await chatGPT.getResponse(cleanInputProducts, userInput);
     if(!("content" in finalResponse)){
         throw error(400, {message: 'Got no response from AI'})
     }
-
-    // console.log("response:",finalResponse.content)
-
     const response = csvToJson(finalResponse.content)
     console.timeEnd("GPT response")
-
-    // console.log("Response Keys:",Object.keys(response[0]))
 
     const tableData = table.convertToTableData(selectedProducts, response)
 
@@ -68,28 +58,12 @@ export const compare = async (session, selectedProducts, country) => {
 
 
 
-
-
-export const getCleanProductByAsin = async (asin, domain) => {
-
-
-    // let product = await getProductInformation(asin, domain)
-    let productInfo = await getReviews(asin, domain)
-    let cleanProduct = await validate.cleanProductInfo(productInfo)
-    await chatGPT.getOpenAIModeration(JSON.stringify(cleanProduct))
-
-
-    return cleanProduct
-}
-
-
-export const updateDatabase = async (supabaseService, user, finalCredit, account_id, tableData) => {
+const updateDatabase = async (supabaseService, user, finalCredit, account_id, tableData) => {
     try{
     await Promise.all([apiFuncs.updateCredit(supabaseService, user, finalCredit), apiFuncs.insertCompare(supabaseService, user, account_id, tableData)]);
     }catch(err){
         throw error(400, `Could not get product data: ${err}`)
     }
-
 }
 
 
@@ -116,6 +90,10 @@ function convertDataType(dataPoint){
     if(dataPoint=="true")
         return true
     if(dataPoint=="false")
+        return false
+    if(dataPoint=="t")
+        return true
+    if(dataPoint=="f")
         return false
     if(dataPoint.toLowerCase()=="unknown")
         return null

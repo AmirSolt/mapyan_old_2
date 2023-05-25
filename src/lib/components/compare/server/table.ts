@@ -2,7 +2,7 @@
 
 export function convertToTableData(selectedProducts, aiResponse){
 
-    let tableData = []
+    let tableData:any[] = []
 
     selectedProducts.forEach(
         (sProduct) =>{

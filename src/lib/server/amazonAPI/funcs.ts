@@ -105,10 +105,11 @@ export async function getReviewsAPI(asin, domain){
         }
 
         reviews = {
-            "asin": data.product.asin,
-            "title": data.product.title,
+            "product": data.product,
             "reviews": data.reviews,
         }
+
+
 
     }).catch((err)=> {
         throw error(400, `There was an error in fetching reviews: ${err}`)

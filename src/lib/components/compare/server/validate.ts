@@ -4,19 +4,13 @@ import { getTokens } from './tokenizer'
 import { error } from '@sveltejs/kit'
 
 export const userCheck = (session) => {
-
-
-
     if (!session.user)
         throw error(400, { message: 'Not a user' })
-
     return session.user
 }
 
 
 export const creditCheck = (credit) => {
-
-
     if (credit < 1) {
         throw error(400, { message: 'Not enough credit' })
     }
@@ -32,70 +26,31 @@ export const creditCheck = (credit) => {
 
 
 
-export const cleanProductInfo = async (productInfo) => {
+export const cleanInputProducts = async (inputProducts) => {
 
-    return cleanProductReview(productInfo)
+    return Object.values(inputProducts).map((inputProduct)=>cleanProductReview(inputProduct))
 }
 
 
-
-
-
-const skipSpecList = [
-    "Customer Reviews",
-    "Date First Available",
-    "ASIN ",
-    "Is Discontinued By Manufacturer",
-]
-function cleanProductSpecs(product) {
-
-    // reviews api
-    // global
-    // helpful_votes or biggest text
-
-    let cleanedProduct = {}
-
-        console.log("Token count:", getTokens(JSON.stringify(product)), "ASIN:", product.asin)
-
-    product.specifications.forEach((spec) => {
-
-            if (spec.name in skipSpecList) {
-                return;
-            }
-            cleanedProduct[spec.name] = spec.value
-        }
-    )
-
-        console.log("Shaved Token count:", getTokens(JSON.stringify(product)), "ASIN:", product.asin)
-
-    return cleanedProduct;
-}
-
-
-
-
-
-function cleanProductReview(product) {
+function cleanProductReview(inputProduct) {
 
     let clean:any = {
-        "asin": product.asin,
-        "title": product.title,
+        "asin": inputProduct.product.asin,
+        "title": inputProduct.product.title,
     }
 
-    let reviews = getReviewBodies(product.reviews)
+    let reviews = getReviewBodies(inputProduct.reviews)
     reviews = sortReviewsBySize(reviews)
 
-    clean["reviews"] = reviews.slice(0,5)
+    // clean["reviews"] = reviews.slice(0,5)
+    clean["reviews"] = reviews
+
+    console.log("Token count:", getTokens(JSON.stringify(clean)), "ASIN:", clean.asin)
 
     while(getTokens(JSON.stringify(clean)) > FinalTokenCountLimit/NumberOfCompareProducts){
         clean.reviews.pop()
     }
- 
-
-    console.log("Token count:", getTokens(JSON.stringify(clean)), "ASIN:", product.asin)
-
-
-
+    console.log("After Shave Token count:", getTokens(JSON.stringify(clean)), "ASIN:", clean.asin)
     return clean
 }
 

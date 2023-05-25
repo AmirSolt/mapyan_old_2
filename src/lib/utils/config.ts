@@ -1,4 +1,4 @@
-export const FinalTokenCountLimit = 2000;
+export const FinalTokenCountLimit = 3000;
 export const NumberOfCompareProducts = 3;
 export const CompareCreditCost = 1;
 
@@ -22,16 +22,12 @@ export const ChatGPTTemprature = 0.3 // lower more coherence, higher more creati
 
 
 export const ChatGPTInstructions=`
-Create a product comparison table.
-Use the information in products to come up with 7 features.
-Use information in reviews to give qualifying answers.
-Features must help customers compare the products.
-Don't use title, brand or review as a feature.
-If answer is boolean use true or false.
-If answer is qualifying use either "bad" or "ok" or "good".
-If you can't find an answer use "-".
-Respond only in correct csv.
-Use this template:
+Use PRODUCTS to create a comparison table comparing different products.
+Use boolean to express if a comparison feature matches the user's preferences.
+Answer each row with 't' for true and 'f' for false.
+Don't use title or product name as a feature.
+ONLY answer in csv.
+Example response:
 asin,[feature_name],[feature_name],...
 [asin_value],[feature_value].[feature_value]....
 `

@@ -33,10 +33,6 @@
     
             </div>
         </div>
-
-
-
-                
         {:else}
             <Compare />
         {/if}
