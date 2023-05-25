@@ -4,6 +4,12 @@
 	import {CornerUpRight} from 'lucide-svelte'
 
 	export let tableData: any[] = [];
+
+
+	function truncate(text:string, size:number){
+		return text.substring(0,size) + " ...";
+	}
+
 </script>
 
 <tr>
@@ -13,6 +19,20 @@
 			<a class="flex justify-center" href={colData.link} target="_blank" rel="noopener">
 				<ProductAvatar imageUrl={colData.image} />
 			</a>
+		</td>
+	{/each}
+</tr>
+
+
+<tr>
+	<th class="">Title</th>
+	{#each tableData as colData}
+		<td class="text-center">
+			<div class="">
+				<span>
+					{truncate(colData.title, 5)}
+				</span>
+			</div>
 		</td>
 	{/each}
 </tr>

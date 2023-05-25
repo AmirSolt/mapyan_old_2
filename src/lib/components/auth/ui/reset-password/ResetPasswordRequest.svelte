@@ -49,7 +49,7 @@
             <form on:submit|preventDefault={resetForm}>
                 <div>
                     <label for="email">Email</label>
-                    <input class=" w-full" type="email" name="email" id="email" autocomplete="username" required>
+                    <input class="input w-full" type="email" name="email" id="email" autocomplete="username" required>
                 </div>
                 <br>
                 <button class="btn variant-filled w-full" type="submit">Reset Password</button>

@@ -12,6 +12,7 @@ export function convertToTableData(selectedProducts, aiResponse){
             tableData.push(
                 {
                     "asin":sProduct.asin,
+                    "title":sProduct.title,
                     "image":sProduct.image,
                     "link":sProduct.link,
                     "rating":sProduct.rating,

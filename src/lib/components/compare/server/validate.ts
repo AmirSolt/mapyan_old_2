@@ -37,6 +37,7 @@ function cleanProductReview(inputProduct) {
     let clean:any = {
         "asin": inputProduct.product.asin,
         "title": inputProduct.product.title,
+        "price": inputProduct.product.price,
     }
 
     let reviews = getReviewBodies(inputProduct.reviews)

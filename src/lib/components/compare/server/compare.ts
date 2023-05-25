@@ -13,18 +13,28 @@ export const compare = async (session, selectedProducts, inputProducts, userInpu
 
     // ========================== Check creds ============================
     let user = validate.userCheck(session);
-
+    
     let account = await apiFuncs.fetchAccountCredit(supabaseService, user)
     validate.creditCheck(account.credit);
     // =================================================================
+    
 
+    // ========================== Mount price on input product ============================
+    selectedProducts.forEach((sProduct)=>{
+        let price = null
+        if("price" in sProduct){
+            const p = sProduct.price;
+            price = `${p.symbol} ${p.value} ${p.currency}`
+        }
+        Object.values(inputProducts).forEach((iProduct)=>{
+            if(iProduct.asin == sProduct.asin)
+                iProduct.product.price = price
+        })
+    })
+    // =================================================================
 
 
     let cleanInputProducts = await validate.cleanInputProducts(inputProducts)
-
-    console.log(cleanInputProducts)
-
-    throw error(400, "test")
 
     console.time("GPT response")
     let finalResponse = await chatGPT.getResponse(cleanInputProducts, userInput);
@@ -87,6 +97,8 @@ function csvToJson(csv){
 
 function convertDataType(dataPoint){
 
+    if(dataPoint === undefined)
+        return null
     if(dataPoint=="true")
         return true
     if(dataPoint=="false")

@@ -26,10 +26,11 @@
 <p class="text-rose-600">
     To complete the deletion, please logout.
 </p>
-
+<br>
 {/if}
 
 <h2>Delete your account</h2>
+<br>
 <form on:submit|preventDefault={ confirmDelete }>
     <button class="btn variant-filled-error" type="submit"> Delete Your Data</button>
 </form>

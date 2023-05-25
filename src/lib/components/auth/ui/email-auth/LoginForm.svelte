@@ -24,10 +24,10 @@
         <form on:submit|preventDefault={loginForm}>
             <div>
                 <label for="email">Email</label>
-                <input class="w-full" type="email" name="email" id="email" autocomplete="username" required>
+                <input class="input w-full" type="email" name="email" id="email" autocomplete="username" required>
                 <br>
                 <label for="password">Password</label>
-                <input class="w-full" type="password" name="password" id="password" autocomplete="current-password" required>
+                <input class="input w-full" type="password" name="password" id="password" autocomplete="current-password" required>
             </div>
             <br>
             <button class="btn variant-filled w-full" type="submit">Login</button>

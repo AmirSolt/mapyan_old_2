@@ -26,10 +26,10 @@
         
             <div>
                 <label for="new_password">New Password</label>
-                <input class=" w-full" type="password" name="new_password" id="new_password" autocomplete="new-password" required>
+                <input class="input w-full" type="password" name="new_password" id="new_password" autocomplete="new-password" required>
                 <br>
                 <label for="confirm_new_password">Confirm New Password</label>
-                <input class=" w-full" type="password" name="confirm_new_password" id="confirm_new_password" autocomplete="new-password" required>
+                <input class="input w-full" type="password" name="confirm_new_password" id="confirm_new_password" autocomplete="new-password" required>
             </div>
           
             <br>

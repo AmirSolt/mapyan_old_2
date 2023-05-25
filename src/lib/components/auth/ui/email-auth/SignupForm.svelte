@@ -41,10 +41,10 @@
         
                 <div>
                     <label for="email">Email</label>
-                    <input class="w-full" type="email" name="email" id="email" autocomplete="username" required>
+                    <input class="input w-full" type="email" name="email" id="email" autocomplete="username" required>
                     <br>
                     <label for="password">Password</label>
-                    <input class="w-full" type="password" name="password" id="password" autocomplete="new-password" required>
+                    <input class="input w-full" type="password" name="password" id="password" autocomplete="new-password" required>
                 </div>
                 <br>
                 <button class="btn variant-filled w-full" type="submit">Sign Up</button>
@@ -62,9 +62,9 @@
             <form on:submit|preventDefault={verifyTokenForm}>
                 <!-- <label for="email">Email</label> -->
                 <div>
-                    <input class="hidden w-full" type="email" name="email" id="email" bind:value={usedEmail} >
+                    <input class="input hidden w-full" type="email" name="email" id="email" bind:value={usedEmail} >
                     <label for="token">Token</label>
-                    <input class="w-full" type="text" name="token" id="token" autocomplete="off" required>
+                    <input class="input w-full" type="text" name="token" id="token" autocomplete="off" required>
                 </div>
                 <br>
                 <button class="btn variant-filled w-full" type="submit">Verify</button>
