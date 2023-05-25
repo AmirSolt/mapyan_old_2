@@ -15,7 +15,11 @@
 	function openCompareModal() {
 		showPrompt = true;
 	}
+
+
+
 </script>
+
 
 
 

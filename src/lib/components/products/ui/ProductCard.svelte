@@ -2,23 +2,55 @@
 <script lang="ts">
     export let product:any; 
 
+    import {userAmazonDomain, productReviewsCache, selectedProducts} from '$lib/utils/stores'
+
     
     import StarRating from "./StarRating.svelte";
-
-    import {selectedProducts} from '$lib/utils/stores'
 
     import {NumberOfCompareProducts} from '$lib/utils/config';
 
 
     function addCompareProduct(){
-        selectedProducts.update(
-            (list)=>{
-                if(list.length>=NumberOfCompareProducts){
-                    return list;
-                }
-                return list.find((item) => item.asin === product.asin) ? list : [...list, product]
+        selectedProducts.update((list)=>{
+            if(list.length>=NumberOfCompareProducts){
+                return list;
             }
-        )
+
+            fetchSaveReviewsAPI()
+
+            return list.find((item) => item.asin === product.asin) ? list : [...list, product]
+        })
+    }
+
+
+
+
+    async function fetchSaveReviewsAPI(){
+
+	
+        let response = await fetch('/api/product-reviews', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                asin: product.asin,
+                domain: $userAmazonDomain
+            })
+        });
+
+        let data = await response.json();
+        fetchSaveReviews(data.reviews);
+    }
+
+    function fetchSaveReviews(fetchedReviews){
+        const key = `${$userAmazonDomain}/${product.asin}`
+        productReviewsCache.update( (reviews)=>{
+			if(fetchedReviews)
+                reviews[key] = fetchedReviews
+
+			return reviews
+		})
     }
 
      

@@ -23,6 +23,5 @@ export const updatePasswordSchema = z.object({
 
 
 export const searchSchema = z.object({
-    country: z.string().regex(/^[a-zA-Z]{2}$/),
     keyword: z.string().min(1).max(255),
 })

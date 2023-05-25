@@ -4,13 +4,14 @@ import * as apiFuncs from './apiFuncs'
 import * as chatGPT from './chatGPT'
 import * as table from './table'
 import {supabaseService} from '$lib/server/apps/supabase'
-import {getProductInformation, getReviews, countryToDomain} from '$lib/components/products/server/amazonApiFuncs'
+import {getProductInformation, getReviews, countryToDomain} from '$lib/server/amazonAPI/funcs'
 import {error} from '@sveltejs/kit'
 import { CompareCreditCost } from '$lib/utils/config'
 
 
 export const compare = async (session, selectedProducts, country) => {
 
+    // ========================== Check creds ============================
     const domain = countryToDomain(country)
 
     const asins = selectedProducts.map((product) => {
@@ -21,6 +22,8 @@ export const compare = async (session, selectedProducts, country) => {
 
     let account = await apiFuncs.fetchAccountCredit(supabaseService, user)
     validate.creditCheck(account.credit);
+    // =================================================================
+
 
     console.time("Product fetching")
     let cleanProducts = await Promise.all(asins.map( asin => getCleanProductByAsin(asin, domain) ))
@@ -43,7 +46,7 @@ export const compare = async (session, selectedProducts, country) => {
 
     const tableData = table.convertToTableData(selectedProducts, response)
 
-
+    // ================= update db
     let finalCredit = account.credit - CompareCreditCost;
     await updateDatabase(supabaseService, user, finalCredit, account.id, tableData)
 

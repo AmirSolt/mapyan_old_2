@@ -6,9 +6,9 @@ const API_URL = 'https://api.asindataapi.com/request'
 
 
 
-export async function getSearchResults(keyword, country){
+export async function getSearchResultsAPI(keyword, domain){
     let products:any[] = [];
-    const url = addQueriesToURL(API_URL, getSearchQueries(keyword, countryToDomain(country),));
+    const url = addQueriesToURL(API_URL, getSearchQueries(keyword, domain));
     await fetch(url, {
         method: 'GET',
     }).then(
@@ -29,45 +29,7 @@ export async function getSearchResults(keyword, country){
     return products
 }
 
-
-
-
-
-
-
-
-
-// export async function getProductsByAsins(asins:string[], userCountry:string){
-
-//     let domain = countryToDomain(userCountry)
-
-//     let results=[];
-//     await Promise.all(asins.map( asin => getProductInformation(asin, domain) )).then(
-//         (values) => results = values
-//     ).catch((error)=> console.log("Found an error in getProductsByAsins"))
-
-
-//     // console.log(results)
-
-//     return results
-// }
-
-
-// async function getProductByAsin(asin:string, domain:string){
-//     let results=[];
-//     await getProductInformation(asin, domain)
-//     .then(
-//         (values) =>{
-//             results = values
-//         } 
-//     ).catch((error)=> console.log("Found an error in getProductByAsin"))
-
-        
-//     return results
-// }
-
-
-export async function getProductInformation(asin, domain){
+export async function getProductInfoAPI(asin, domain){
 
     console.time(`fetching ASIN: ${asin}`)
 
@@ -124,7 +86,12 @@ export async function getProductInformation(asin, domain){
     return product
 }
 
-export async function getReviews(asin, domain){
+
+
+
+
+
+export async function getReviewsAPI(asin, domain){
     let reviews:any = {};
     const url = addQueriesToURL(API_URL, getReviewQueries(asin, domain));
     await fetch(url, {
@@ -167,45 +134,7 @@ export async function getReviews(asin, domain){
 
 
 
-// ================= ONE LINK dosnt work with amazon products. Dumbasses can't do anyth right
-// function swapUrlWithAFfiliate(url:string){
-//     const urlObj = new URL(url);
-//     swapDomain(urlObj);
-//     addAffiliateCodes(urlObj);
-//     return urlObj.toString();
-// }
 
-
-// function addAffiliateCodes(urlObj:URL){
-//     urlObj.searchParams.set('tag', AFFILIATE_CODE);
-//     return urlObj;
-// }
-
-// function swapDomain(urlObj:URL){
-//     urlObj.hostname = 'www.amazon.com';
-//     return urlObj;
-// }
-
-
-
-
-
-function changeDomainExt(url: string, newTld: string="com"): string {
-    const urlObj = new URL(url);
-    const { protocol, pathname, search } = urlObj;
-  
-    // Extract the existing domain
-    const domain = urlObj.hostname;
-  
-    // Replace the TLD with the new extension
-    const newDomain = domain.replace(/\.[^.]+$/, `.${newTld}`);
-  
-    // Reconstruct the URL with the new domain extension
-    const newUrl = `${protocol}//${newDomain}${pathname}${search}`;
-  
-    return newUrl;
-}
-  
 
 
 function addQueriesToURL(urlRaw, queries){
@@ -247,10 +176,6 @@ function getProductQueries(asin:string, domain:string){
 }
 
 function getReviewQueries(asin:string, domain:string){
-
-
-
-
     return{
         api_key: PRIVATE_AMAZON_SCRAPER_API_KEY,
         type: "reviews",
@@ -266,50 +191,6 @@ function getReviewQueries(asin:string, domain:string){
         page: "1",
         output: "json",
         include_html: "false"
-    }
-}
-
-
-export function countryToDomain(country){
-    switch(country){
-        case 'US':
-            return 'amazon.com'
-        case 'UK':
-            return 'amazon.co.uk'
-        case 'CA':
-            return 'amazon.ca'
-        case 'AU':
-            return 'amazon.com.au'
-        case 'IN':
-            return 'amazon.in'
-        case 'MX':
-            return 'amazon.com.mx'
-        case 'BR':
-            return 'amazon.com.br'
-        case 'SG':
-            return 'amazon.sg'
-        case 'TR':
-            return 'amazon.com.tr'
-        case 'AE':
-            return 'amazon.ae'
-        case 'SA':
-            return 'amazon.sa'
-        case 'NL':
-            return 'amazon.nl'
-        case 'DE':
-            return 'amazon.de'
-        case 'FR':
-            return 'amazon.fr'
-        case 'ES':
-            return 'amazon.es'
-        case 'IT':
-            return 'amazon.it'
-        case 'JP':
-            return 'amazon.co.jp'
-        case 'SE':
-            return 'amazon.se'
-        default:
-            return 'amazon.com'
     }
 }
 
