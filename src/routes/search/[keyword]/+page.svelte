@@ -52,7 +52,7 @@
 	async function fetchSearchAPI(){
 
 	
-		let response = await fetch('/api/search', {
+		let response = await fetch('/api/products/search', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'

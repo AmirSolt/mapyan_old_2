@@ -37,10 +37,6 @@
 
 </script>
 
-<svelte:head>
-    <script src="https://js.hcaptcha.com/1/api.js?render=explicit" async defer></script>
-</svelte:head>
-
 
 
 

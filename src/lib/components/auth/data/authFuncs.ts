@@ -9,14 +9,17 @@ export const signup = async (supabase, formData ) => {
     const req = Object.fromEntries(formData) 
     const email = req.email as string
     const password = req.password as string
+    const captchaToken = req["h-captcha-response"] as string
 
-    if(!schemas.signUpSchema.safeParse({email, password}).success){
+
+    if(!schemas.signUpSchema.safeParse({email, password, captchaToken}).success){
         throw error(400, "invalid credentials")
     }
 
     const { data, error: err } = await supabase.auth.signUp({
         email: email,
         password: password,
+        options: {captchaToken}
     })
 
 
@@ -38,14 +41,17 @@ export const login = async (supabase, formData ) => {
     const req = Object.fromEntries(formData) 
     const email = req.email as string
     const password = req.password as string
+    const captchaToken = req["h-captcha-response"] as string
 
-    if(!schemas.signInSchema.safeParse({email, password}).success){
+
+    if(!schemas.signInSchema.safeParse({email, password, captchaToken}).success){
         throw error(400, "invalid credentials")
     }
 
     const { data, error: err } = await supabase.auth.signInWithPassword({
         email: email,
         password: password,
+        options: {captchaToken}
     })
 
     if (err) {
@@ -98,8 +104,9 @@ export const verifyToken = async (supabaseAuthClient, formData ) => {
 export const resetPasswordRequest = async (supabase, formData ) => {    
     const req = Object.fromEntries(formData) 
     const email = req.email as string
+    const captchaToken = req["h-captcha-response"] as string
 
-    if(!schemas.resetPasswordReqSchema.safeParse({email}).success){
+    if(!schemas.resetPasswordReqSchema.safeParse({email, captchaToken}).success){
         throw error(400, "invalid credentials")
 
     }
@@ -108,6 +115,7 @@ export const resetPasswordRequest = async (supabase, formData ) => {
         email,
         {
             redirectTo: `${PUBLIC_DOMAIN}reset-password/update-password`,
+            captchaToken: captchaToken
         }
     )
 
@@ -122,32 +130,3 @@ export const resetPasswordRequest = async (supabase, formData ) => {
     }
 }
 
-export const updatePassword = async (supabase, formData ) => {    
-    const req = Object.fromEntries(formData) 
-    const new_password = req.new_password as string
-    const confirm_new_password = req.new_password as string
-
-    if(new_password !== confirm_new_password){
-        throw error(400, "Passwords do not match")
-
-    }
-
-    if(!schemas.updatePasswordSchema.safeParse({new_password}).success){
-        throw error(400, "invalid credentials")
-
-    }
-
-    const { data, error: err } = await supabase.auth.updateUser(
-        {password: new_password}
-    )
-
-    if (err) {
-        throw error(400, `Autherization failed: ${err}`)
-
-    }
-
-    return {
-        error: false,
-        message: "Authentification success"
-    }
-}

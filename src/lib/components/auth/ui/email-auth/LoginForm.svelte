@@ -2,6 +2,7 @@
 <script lang='ts'>
 
     import { login } from '$lib/components/auth/data/authFuncs'
+    import HCaptcha from '$lib/components/auth/ui/HCaptcha.svelte';
 
     import {page} from '$app/stores';
 	import { goto } from '$app/navigation';
@@ -31,7 +32,9 @@
             </div>
             <br>
             <button class="btn variant-filled w-full" type="submit">Login</button>
-          
+            <br>
+            <br>
+            <HCaptcha  />
         </form>
         
         <br>

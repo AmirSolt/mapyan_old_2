@@ -3,10 +3,12 @@ import {z} from 'zod'
 export const signUpSchema = z.object({
     email: z.string().email(),
     password: z.string().min(6),
+    captchaToken: z.string()
 })
 export const signInSchema = z.object({
     email: z.string().email(),
     password: z.string().min(6),
+    captchaToken: z.string()
 })
 export const tokenVerifySchema = z.object({
     email: z.string().email(),
@@ -14,10 +16,9 @@ export const tokenVerifySchema = z.object({
 })
 export const resetPasswordReqSchema = z.object({
     email: z.string().email(),
+    captchaToken: z.string()
 })
-export const updatePasswordSchema = z.object({
-    new_password: z.string().min(6),
-})
+
 
 
 

@@ -1,7 +1,6 @@
 
 <script lang='ts'>
 
-    import { updatePassword } from '$lib/components/auth/data/authFuncs'
 
     import {page} from '$app/stores';
 	import { goto } from '$app/navigation';
@@ -11,9 +10,23 @@
     async function updatePasswordForm(e){
         const form = e.target
         let formData = new FormData(form)
-        let response = await updatePassword(supabaseAuthClient, formData)
 
-        goto("/")
+        let response = await fetch('/api/user/update-password', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				newPassowrd: formData.get("new_password"),
+				confirmNewPassowrd: formData.get("confirm_new_password"),
+			})
+		});
+
+
+        let data = await response.json()
+
+        if(data.success)
+            goto("/")
     }
 
 </script>

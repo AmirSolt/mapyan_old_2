@@ -15,7 +15,7 @@
 			</p>
 		</div>
 		
-		<div class="w-50 h-50 md:w-80 md:h-80">
+		<div class="w-50 h-50 md:w-72 md:h-72">
 			<img class="max-w-full max-h-full rounded-xl" src="/banner_image.svg" alt="">
 		</div>
 

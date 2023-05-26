@@ -28,7 +28,7 @@
     async function fetchSaveReviewsAPI(){
 
 	
-        let response = await fetch('/api/product-reviews', {
+        let response = await fetch('/api/products/product-reviews', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

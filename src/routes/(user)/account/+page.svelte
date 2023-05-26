@@ -26,6 +26,16 @@
     <Logout />
 </div>
 <br>
+<div class="card p-4">
+    <h2>
+        Update password
+    </h2>
+    <br>
+    <a href="/reset-password/update-password" class="btn variant-filled">
+    Update Password
+    </a>
+</div>
+<br>
 <br>
 <div class="card p-4">
     <UserDelete />

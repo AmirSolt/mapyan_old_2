@@ -29,7 +29,7 @@
 
 
     async function getAIResponse() {
-		let response = await fetch('/api/compare', {
+		let response = await fetch('/api/products/compare', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'

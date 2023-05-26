@@ -8,7 +8,7 @@
     let showDeleteGuide = false;
 
     async function deleteUser(){
-        await fetch('/api/delete-user')
+        await fetch('/api/user/delete-user')
     }
 
     function confirmDelete(){
