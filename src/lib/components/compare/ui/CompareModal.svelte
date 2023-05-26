@@ -23,11 +23,11 @@
                 </h1>
     
                 <br>
-                <a href="/options/login" class="btn variant-filled w-full">
+                <a href="/email-auth/login" class="btn variant-filled w-full">
                     Login
                 </a>
                 <br>
-                <a href="/options/signup" class="btn variant-ringed w-full">
+                <a href="/email-auth/signup" class="btn variant-ringed w-full">
                     Sign-up
                 </a>
     

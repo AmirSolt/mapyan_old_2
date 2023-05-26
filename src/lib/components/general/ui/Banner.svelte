@@ -1,15 +1,31 @@
-<div class="mt-16 grid justify-items-center text-center">
-	<h1>
-		<span
-			class=" bg-gradient-to-r from-blue-400 to-purple-400  box-decoration-clone bg-clip-text text-7xl font-bold text-transparent"
-		>
-			Too Long; Didn't Read
-		</span>
-	</h1>
+<div class="my-5 md:my-16 flex flex-col justify-center items-center text-center gap-6 p-5">
+	
+	
+	<div class="flex flex-col md:flex-row justify-center items-center gap-6">
+		<div class="md:w-1/2">
+			<h1>
+				<span
+					class=" bg-gradient-to-r from-blue-400 to-purple-400  box-decoration-clone bg-clip-text text-6xl font-bold text-transparent">
+					Compare Amazon Reviews
+				</span>
+			</h1>
+			<br>
+			<p class="text-3xl">
+				Utilize AI to find the best product that suits your needs.
+			</p>
+		</div>
+		
+		<div class="w-50 h-50 md:w-80 md:h-80">
+			<img class="max-w-full max-h-full rounded-xl" src="/banner_image.svg" alt="">
+		</div>
 
-	<span class="my-16 block max-w-3xl text-4xl text-white-400">
-		Summarize Any Website <br>
-	</span>
 
+		
+	</div>
 
+	
+	
+	
 </div>
+
+
