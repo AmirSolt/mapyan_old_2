@@ -34,7 +34,7 @@
 
 
 <form on:submit|preventDefault={submitForm}>
-    <div class="flex flex-col  items-start p-2 gap-6">
+    <div class="variant-soft p-12 rounded-lg flex flex-col  items-start  gap-6">
 
         <!-- <div>
             <label for={priceVQualityProblem}>{priceVQualityProblem}</label>
@@ -60,7 +60,7 @@
 
         <div class="flex flex-col gap-4">
             <div>
-                <label for={inputListProblem}>{inputListProblem} <small>(Press Enter)</small></label>
+                <label for={inputListProblem}>{inputListProblem} <small class="ms-1 text-blue-500">(Press Enter)</small></label> 
                 <InputChip
                 bind:value={inputList} 
                 name={inputListProblem}

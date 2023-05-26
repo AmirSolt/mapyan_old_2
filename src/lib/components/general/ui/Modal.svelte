@@ -37,7 +37,7 @@
 				</div>
 			</div>
 			<!-- <slot name="header" /> -->
-			<div class="h-full" >
+			<div class="variant-soft h-full" >
 				<slot />
 			</div>
 
