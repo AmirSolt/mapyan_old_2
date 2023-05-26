@@ -33,10 +33,10 @@
 				</a>
 			{:else}
 				<div class="flex gap-2">
-					<a href="/options/login" class="btn variant-filled">
+					<a href="/email-auth/login" class="btn variant-filled">
 						Login
 					</a>
-					<a href="/options/signup" class="btn variant-ringed">
+					<a href="/email-auth/sign-up" class="btn variant-ringed">
 						Sign-up
 					</a>
 				</div>
