@@ -16,7 +16,7 @@ export const CompareCreditCost = 1;
 
 
 
-export const ChatGPTTemprature = 0.5 // lower more coherence, higher more creativity
+export const ChatGPTTemprature = 0.3 // lower more coherence, higher more creativity
 
 
 

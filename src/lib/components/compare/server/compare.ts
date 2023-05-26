@@ -20,6 +20,7 @@ export const compare = async (session, selectedProducts, inputProducts, userInpu
     
 
     // ========================== Mount price on input product ============================
+    console.time("iProduct price mount")
     selectedProducts.forEach((sProduct)=>{
         let price = null
         if("price" in sProduct){
@@ -31,10 +32,13 @@ export const compare = async (session, selectedProducts, inputProducts, userInpu
                 iProduct.product.price = price
         })
     })
+    console.timeEnd("iProduct price mount")
     // =================================================================
 
-
+    console.time("cleaning Products")
     let cleanInputProducts = await validate.cleanInputProducts(inputProducts)
+    console.timeEnd("cleaning Products")
+
 
     console.time("GPT response")
     let finalResponse = await chatGPT.getResponse(cleanInputProducts, userInput);
@@ -43,6 +47,8 @@ export const compare = async (session, selectedProducts, inputProducts, userInpu
     }
     const response = csvToJson(finalResponse.content)
     console.timeEnd("GPT response")
+
+    console.log("CHATGPT:",response)
 
     const tableData = table.convertToTableData(selectedProducts, response)
 

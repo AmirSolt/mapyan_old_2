@@ -26,8 +26,10 @@
 <h2>
     History
 </h2>
-<small>Latest top</small>
+<small>Latest: Top</small>
 
+<br>
+<br>
 
 {#if compare_instances}
 
