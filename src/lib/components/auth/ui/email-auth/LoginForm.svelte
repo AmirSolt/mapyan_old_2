@@ -3,7 +3,8 @@
 
     import { login } from '$lib/components/auth/data/authFuncs'
     import HCaptcha from '$lib/components/auth/ui/HCaptcha.svelte';
-
+    import { toastStore } from '@skeletonlabs/skeleton';
+    import type { ToastSettings } from '@skeletonlabs/skeleton';
     import {page} from '$app/stores';
 	import { goto } from '$app/navigation';
     $: ({supabaseAuthClient} = $page.data)
@@ -13,9 +14,15 @@
         const form = e.target
         let formData = new FormData(form)
 
-        let response = await login(supabaseAuthClient, formData)
-
-        goto("/")
+        try{
+            let response = await login(supabaseAuthClient, formData)
+            goto("/")
+        }catch(err){
+            const t: ToastSettings = {
+                message: err.body.message,
+            };
+            toastStore.trigger(t);
+        }
     }
 
 </script>

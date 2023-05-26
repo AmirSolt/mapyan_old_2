@@ -19,7 +19,7 @@
 
     <div class="flex justify-center items-center h-full w-full">
 
-        <div class="flex flex-col justify-center items-center p-5">
+        <div class="flex flex-col justify-center items-center p-5 variant-soft rounded-lg">
     
             <p>
                 {prompt}

@@ -4,7 +4,8 @@
     import HCaptcha from '$lib/components/auth/ui/HCaptcha.svelte';
     let stepIndex:number = 0;
     let usedEmail:string = '';
-
+    import { toastStore } from '@skeletonlabs/skeleton';
+    import type { ToastSettings } from '@skeletonlabs/skeleton';
     import {page} from '$app/stores';
 	import { goto } from '$app/navigation';
     $: ({supabaseAuthClient} = $page.data)
@@ -17,8 +18,17 @@
         const form = e.target
         let formData = new FormData(form)
         usedEmail = formData.get('email')?.toString()?? ''
-        let response = await signup(supabaseAuthClient, formData)
-        stepIndex = 1;
+
+        try{
+            let response = await signup(supabaseAuthClient, formData)
+            stepIndex = 1;
+        }catch(err){
+            const t: ToastSettings = {
+                message: err.body.message,
+            };
+            toastStore.trigger(t);
+        }
+
     }
     async function verifyTokenForm(e) {
         const form = e.target

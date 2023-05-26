@@ -13,7 +13,7 @@ export const signup = async (supabase, formData ) => {
 
 
     if(!schemas.signUpSchema.safeParse({email, password, captchaToken}).success){
-        throw error(400, "invalid credentials")
+        throw error(400, "password has to be min 6 characters ")
     }
 
     const { data, error: err } = await supabase.auth.signUp({
@@ -24,7 +24,7 @@ export const signup = async (supabase, formData ) => {
 
 
     if (err) {
-        throw error(400, `Autherization failed: ${err}`)
+        throw error(400, err)
     }
 
     return {
@@ -55,7 +55,7 @@ export const login = async (supabase, formData ) => {
     })
 
     if (err) {
-        throw error(400, `Autherization failed: ${err}`)
+        throw error(400, err)
 
     }
 
@@ -86,7 +86,7 @@ export const verifyToken = async (supabaseAuthClient, formData ) => {
 
     
     if (err) {
-        throw error(400, `Autherization failed: ${err}`)
+        throw error(400, err)
 
     }
 
@@ -120,7 +120,7 @@ export const resetPasswordRequest = async (supabase, formData ) => {
     )
 
     if (err) {
-        throw error(400, `Autherization failed: ${err}`)
+        throw error(400, err)
 
     }
 

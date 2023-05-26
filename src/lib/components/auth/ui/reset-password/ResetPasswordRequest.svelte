@@ -3,7 +3,8 @@
 
     import { resetPasswordRequest } from '$lib/components/auth/data/authFuncs'
     import HCaptcha from '$lib/components/auth/ui/HCaptcha.svelte';
-
+    import { toastStore } from '@skeletonlabs/skeleton';
+    import type { ToastSettings } from '@skeletonlabs/skeleton';
     import {page} from '$app/stores';
     $: ({supabaseAuthClient} = $page.data)
 
@@ -11,10 +12,18 @@
     let showResetGuide = false
 
     async function resetForm(e){
-        showResetGuide=true
         const form = e.target
         let formData = new FormData(form)
-        let response = await resetPasswordRequest(supabaseAuthClient, formData)
+        
+        try{
+            let response = await resetPasswordRequest(supabaseAuthClient, formData)
+            showResetGuide=true
+        }catch(err){
+            const t: ToastSettings = {
+                message: err.body.message,
+            };
+            toastStore.trigger(t);
+        }
     }
 
 </script>

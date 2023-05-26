@@ -4,18 +4,16 @@
     import { selectedProducts, productReviewsCache } from '$lib/utils/stores';
 	import CompareTable from '../compareTable/CompareTable.svelte'
 	import CompareLoading from './CompareLoading.svelte';
-
+    import { toastStore } from '@skeletonlabs/skeleton';
+    import type { ToastSettings } from '@skeletonlabs/skeleton';
 
 	export let userInput:{} = {};
-
-
-	console.log("selectedProducts:",$selectedProducts,)
-	console.log("productReviewsCache:",$productReviewsCache,)
 
 
     let tableData: any[]=[];
 	let remainingCredit: number = 0;
 	let isLoading: boolean = true;
+	let isError:boolean = false;
 
 
 	function checkInputProductsFetched(){
@@ -25,8 +23,6 @@
 			getAIResponse();
 		}
 	}
-
-
 
     async function getAIResponse() {
 		let response = await fetch('/api/products/compare', {
@@ -43,19 +39,34 @@
 
 		let data = await response.json();
 
-		tableData = data.tableData;
-		remainingCredit = data.finalCredit;
-		isLoading = false;
+		if(response.ok){
+			tableData = data.tableData;
+			remainingCredit = data.finalCredit;
+			isLoading = false;
+		}else{
+			isLoading=false;
+			isError=true;
+            const t: ToastSettings = {
+            message: data.message,
+            };
+            toastStore.trigger(t);
+		}
 
-		console.log('Compare.svelte:', data);
 	}
 
 
+
+
+
+
+
+
+
+
+	
     import { onMount } from 'svelte';
 	onMount(()=>{
-
-        checkInputProductsFetched();
-
+		checkInputProductsFetched();
 	})
 
 </script>
@@ -68,6 +79,14 @@
 
     <CompareLoading  />
 
+
+{:else if isError}
+
+    <div class="flex flex-col p-2 h-full w-full">
+		<h1 class="variant-soft-error p-4 rounded-lg">
+			oops something went wrong.
+		</h1>
+    </div>
 {:else}
 	
     <div class="flex flex-col p-2 h-full w-full">

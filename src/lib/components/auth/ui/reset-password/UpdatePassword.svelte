@@ -1,32 +1,39 @@
 
 <script lang='ts'>
-
+    import { toastStore } from '@skeletonlabs/skeleton';
+    import type { ToastSettings } from '@skeletonlabs/skeleton';
 
     import {page} from '$app/stores';
 	import { goto } from '$app/navigation';
-    $: ({supabaseAuthClient} = $page.data)
 
 
     async function updatePasswordForm(e){
         const form = e.target
         let formData = new FormData(form)
 
+        
+
         let response = await fetch('/api/user/update-password', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				newPassowrd: formData.get("new_password"),
-				confirmNewPassowrd: formData.get("confirm_new_password"),
-			})
-		});
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                newPassowrd: formData.get("new_password"),
+                confirmNewPassowrd: formData.get("confirm_new_password"),
+            })
+        });
 
-
-        let data = await response.json()
-
-        if(data.success)
-            goto("/")
+        if(response.ok){
+            goto("/api/user/logout")
+        }else{
+            let err = await response.json()
+            const t: ToastSettings = {
+            message: err.message,
+            };
+            toastStore.trigger(t);
+        }
+  
     }
 
 </script>

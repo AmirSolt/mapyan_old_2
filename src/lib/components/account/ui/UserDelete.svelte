@@ -1,19 +1,28 @@
 <script lang='ts'>
 
     import ConfirmActionModal from "$lib/components/general/ui/ConfirmActionModal.svelte";
-	import { redirect } from "@sveltejs/kit";
-
+    import { toastStore } from '@skeletonlabs/skeleton';
+    import type { ToastSettings } from '@skeletonlabs/skeleton';
+	import { goto } from '$app/navigation';
     const confirmPrompt = "Are you sure you want to delete your account?";
     let showConfirmModal = false;
-    let showDeleteGuide = false;
 
     async function deleteUser(){
-        await fetch('/api/user/delete-user')
+        
+
+        try{
+            await fetch('/api/user/delete-user')
+            goto("/api/user/logout")
+        }catch(err){
+            const t: ToastSettings = {
+                message: err.body.message,
+            };
+            toastStore.trigger(t);
+        }
     }
 
     function confirmDelete(){
         showConfirmModal=true;
-        showDeleteGuide = true;
     }
 
 </script>
@@ -21,13 +30,7 @@
 
 
 
-{#if showDeleteGuide}
 
-<p class="text-rose-600">
-    To complete the deletion, please logout.
-</p>
-<br>
-{/if}
 
 <h2>Delete your account</h2>
 <br>

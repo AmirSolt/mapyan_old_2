@@ -68,7 +68,7 @@
                 max={8}
                 placeholder="Enter..." />
             </div>
-            <button class="btn variant-filled w-1/2" on:click={}>Add</button>
+            <!-- <button class="btn variant-filled w-1/2" on:click={}>Add</button> -->
         
         </div>
 
