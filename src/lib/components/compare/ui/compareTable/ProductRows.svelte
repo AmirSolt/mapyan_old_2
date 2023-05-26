@@ -28,11 +28,11 @@
 	<th class="">Title</th>
 	{#each tableData as colData}
 		<td class="text-center">
-			<div class="">
+			<a class="flex justify-center" href={colData.link} target="_blank" rel="noopener">
 				<span>
-					{truncate(colData.title, 5)}
+					{truncate(colData.title, 15)}
 				</span>
-			</div>
+			</a>
 		</td>
 	{/each}
 </tr>

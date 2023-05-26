@@ -1,4 +1,4 @@
-export const FinalTokenCountLimit = 3000;
+export const FinalTokenCountLimit = 2000;
 export const NumberOfCompareProducts = 3;
 export const CompareCreditCost = 1;
 
@@ -16,21 +16,43 @@ export const CompareCreditCost = 1;
 
 
 
-export const ChatGPTTemprature = 0.3 // lower more coherence, higher more creativity
+export const ChatGPTTemprature = 0.5 // lower more coherence, higher more creativity
 
 
 
 
 export const ChatGPTInstructions=`
-Use PRODUCTS to create a comparison table comparing different products.
-Use boolean to express if a comparison feature matches the user's preferences.
-Answer each row with 't' for true and 'f' for false.
-Don't use title or product name as a feature.
-ONLY answer in csv.
-Example response:
-asin,[feature_name],[feature_name],...
-[asin_value],[feature_value].[feature_value]....
+Follow these instructions:
+1. Use PRODUCTS to create a review comparison table.
+2. User will tell you what features matter to them
+3. Come up with 5 more features
+4. Answer the features based on the reviews.
+6. Don't use title, product name or price as a feature.
+7. For every feature, Only give the best product: "DW"
+8. For every feature, Only give the worst product: "DW"
+9. If not sure answer with: "DQ"
+10. ONLY use "DW" and "DL" once per row.
+11. ONLY answer with "DW", "DQ" and "DL"
+12. ONLY answer in csv.
+13. Example response:
+    asin,[feature_name],[feature_name],...
+    [asin_value],[answer].[answer]....
 `
+// export const ChatGPTInstructions=`
+// Use PRODUCTS to create a review comparison table.
+// User will tell you what features matter to them, answer them based on the reviews.
+// Come up with 5 more features and answer them accordingly.
+// Don't use title, product name or price as a feature.
+// For every feature ONLY give the best product between all: "DW"
+// For every feature ONLY give the worst product between all: "DL"
+// If not sure answer with: "DQ"
+// ONLY use "DW" and "DL" once per row.
+// ONLY answer with "DW", "DQ" and "DL"
+// ONLY answer in csv.
+// Example response:
+// asin,[feature_name],[feature_name],...
+// [asin_value],[answer].[answer]....
+// `
 
 
 

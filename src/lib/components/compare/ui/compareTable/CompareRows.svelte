@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { XCircle, CheckCircle2 } from 'lucide-svelte';
-	import {Smile, Meh, Frown, Angry, Star} from 'lucide-svelte'
+	import {HelpCircle, ThumbsDown, ThumbsUp} from 'lucide-svelte'
 
 	export let key:any = null
 	export let cellData:any = null
@@ -23,17 +23,18 @@
 			{/if}
 		{:else if typeof cellData === 'string'}
 
-			{#if cellData==="bad"}
-				<span class="text-rose-500 flex justify-center ">
-					<Angry />
+
+			{#if cellData==="DW"}
+				<span class="flex justify-center ">
+					<ThumbsUp fill="#15ad67" />
 				</span>
-			{:else if cellData==="ok"}
-				<span class="text-gray-500 flex justify-center ">
-					<Meh />
+			{:else if cellData==="DQ"}
+				<span class="flex justify-center ">
+					<HelpCircle color="#b8b2b2" />
 				</span>
-			{:else if cellData==="good"}
-				<span class="text-green-500 flex justify-center ">
-					<Smile />
+			{:else if cellData==="DL"}
+				<span class="flex justify-center ">
+					<ThumbsDown fill="#e32222" />
 				</span>
 			{:else}
 

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { AppBar, LightSwitch } from '@skeletonlabs/skeleton'
-	import { Flame, Home } from 'lucide-svelte'
+	import { Flame, User } from 'lucide-svelte'
 
 
 
@@ -28,8 +28,8 @@
 			
 
 			{#if user}
-				<a href="/account" class="btn variant-filled">
-					<Home />
+				<a href="/account" class="btn-icon variant-filled">
+					<User />
 				</a>
 			{:else}
 				<div class="flex gap-2">

@@ -83,7 +83,7 @@
 
 <CompareBar />
 <p class="text-sm p-1">
-	We may receive a commision when you click on our links to make a purchase.
+	We may receive a commision when you click on our links.
 </p>
 
 

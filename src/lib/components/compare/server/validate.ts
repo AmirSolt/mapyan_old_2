@@ -42,12 +42,13 @@ function cleanProductReview(inputProduct) {
 
     let reviews = getReviewBodies(inputProduct.reviews)
     reviews = sortReviewsBySize(reviews)
-
-    // clean["reviews"] = reviews.slice(0,5)
     clean["reviews"] = reviews
 
     console.log("Token count:", getTokens(JSON.stringify(clean)), "ASIN:", clean.asin)
+    
+    // remove reviews that are too big
 
+    // Pop smallest if token count exceeds token limit
     while(getTokens(JSON.stringify(clean)) > FinalTokenCountLimit/NumberOfCompareProducts){
         clean.reviews.pop()
     }

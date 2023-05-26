@@ -2,7 +2,7 @@
 	import { ProgressBar } from '@skeletonlabs/skeleton';
 	import LoadingAnim from '$lib/components/general/ui/LoadingAnim.svelte';
 
-	export let seconds:number= 30;
+	export let seconds:number= 15;
 
 
 	// ======================= Loading Logic ============================

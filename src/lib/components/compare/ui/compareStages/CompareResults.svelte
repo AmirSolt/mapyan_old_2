@@ -74,7 +74,7 @@
         <br />
         <div>
             <h2>
-                Your Remaining Credit: {remainingCredit}
+                Credits: {remainingCredit}
             </h2>
 
             <p class="text-sm">*This information has been generated with the help AI, and has not been confirmed by a human.</p>
